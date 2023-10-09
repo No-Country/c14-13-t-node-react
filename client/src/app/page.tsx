@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function Home() {
   return (
@@ -107,6 +108,9 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+      </div>
+      <div className='flex h-40 w-40 items-center justify-center bg-slate-200'>
+        <ThemeToggle />
       </div>
     </main>
   );
