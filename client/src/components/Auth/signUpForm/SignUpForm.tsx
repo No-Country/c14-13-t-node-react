@@ -1,9 +1,11 @@
 'use client';
-import { Text, Button, Input } from '@/components/ui';
+import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpSchema } from '../AuthValidations';
 import { z } from 'zod';
+import { Text, Button, Input, Spinner } from '@/components/ui';
+import { toast } from 'sonner';
 
 /**
  * Este Type representa los campos del Formulario.
@@ -19,11 +21,13 @@ type SignUpSchemaType = z.infer<typeof SignUpSchema>;
  */
 
 export const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     trigger,
+    reset,
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
   /**
    * En la linea anterior,
@@ -42,7 +46,11 @@ export const SignUpForm = () => {
   };
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = ({ userName, email, password }) => {
-    console.log({ userName, email, password });
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      toast.success('Datos enviados exitosamente');
+    }, 1000);
   };
   return (
     <div className='w-[90%] max-w-[23.75rem]'>
@@ -102,8 +110,12 @@ export const SignUpForm = () => {
             <span className='font-bold text-red-600'>{errors.confirmPassword.message}</span>
           )}
         </div>
-        <Button type='submit' variant='base' className='mt-7 w-full'>
-          Aceptar
+        <Button
+          type='submit'
+          variant='base'
+          className='mt-7 flex w-full items-center justify-center'
+        >
+          {isLoading ? <Spinner /> : 'Aceptar'}
         </Button>
       </form>
     </div>

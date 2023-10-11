@@ -34,11 +34,20 @@ const config: Config = {
             opacity: '1',
           },
         },
+        spin: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '100%': {
+            transform: 'rotate(360deg)',
+          },
+        },
       },
     },
     animation: {
       rotationForward: 'rotationForward 0.3s ease-in-out',
       rotationBackwards: 'rotationBackwards 0.3s ease-in-out',
+      spin: 'spin 1s linear infinite',
     },
   },
   plugins: [],

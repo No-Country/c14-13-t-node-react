@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { ThemeProvider } from './_Providers/ThemeProvider';
 import localFont from 'next/font/local';
+import { Toaster } from 'sonner';
 
 const tauz = localFont({ src: '../assets/TauzSerif/tautz.ttf', display: 'swap' });
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body className={tauz.className}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <Toaster position='top-center' richColors />
           {children}
         </ThemeProvider>
       </body>
