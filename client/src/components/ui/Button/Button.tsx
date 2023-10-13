@@ -4,13 +4,16 @@ import type { VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
 interface ButtonProps
-  extends React.HtmlHTMLAttributes<HTMLButtonElement>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   children?: React.ReactNode;
-  type?: 'submit' | 'button' | 'reset';
+  link?: boolean;
 }
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, children, type, ...props }, ref) => {
+  ({ className, variant, link, children, type, ...props }, ref) => {
+    if (link) {
+      return <div className={cn(buttonVariants({ variant, className }))}>{children}</div>;
+    }
     return (
       <button
         type={type}
