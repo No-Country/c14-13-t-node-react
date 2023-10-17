@@ -1,9 +1,15 @@
 import { cva } from 'class-variance-authority';
 
-export const buttonVariants = cva('', {
+export const buttonVariants = cva('disabled:pointer-events-none', {
   variants: {
     variant: {
       base: 'h-12 min-w-[12.8125rem] rounded-lg border-[#5f63f2] bg-[#5f63f2] text-lg font-semibold text-white hover:border-[#8c94ff] hover:bg-[#8c94ff]',
+      formSubmit:
+        'mt-7 flex h-12 w-full min-w-[12.8125rem] items-center justify-center rounded-lg border-[#5f63f2] bg-[#5f63f2] text-lg font-semibold text-white hover:border-[#8c94ff] hover:bg-[#8c94ff]',
+      NavButton1:
+        'rounded-full bg-slate-900 px-6 py-2 font-medium text-white ring-1 ring-slate-200/40 transition-colors duration-300 ease-in hover:bg-slate-700',
+      NavButton2:
+        'rounded-full bg-white px-6 py-2 font-semibold text-slate-900 ring-1 ring-slate-900/40 transition-colors duration-300 ease-in hover:bg-slate-300',
     },
   },
   defaultVariants: {

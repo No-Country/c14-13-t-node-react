@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 
-const ThemeToggle = () => {
+export const ThemeToggle = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -26,17 +26,16 @@ const ThemeToggle = () => {
     <button
       title='Theme toggle'
       aria-label='Theme toggle'
-      className='relative h-8 w-8 transition-all duration-300 ease-in-out'
+      className='relative h-9 w-9 rounded-full p-1 ring-1 ring-slate-900/40 transition-all duration-300 ease-in-out dark:ring-slate-200/50'
       onClick={handleThemeToggle}
     >
       <Image
         alt='Theme'
         src={`/images/icons/${icon}.svg`}
-        fill
+        width={32}
+        height={32}
         className={`${rotationClass}`}
       />
     </button>
   );
 };
-
-export default ThemeToggle;
