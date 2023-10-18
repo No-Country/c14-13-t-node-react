@@ -4,7 +4,8 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpSchema } from '@/schemas/AuthSchema';
 import { z } from 'zod';
-import { Text, Button, Input, Spinner } from '@/components/ui';
+import { Text, Button, Spinner } from '@/components/ui';
+import { FormField, type FieldList } from '@/components';
 import { toast } from 'sonner';
 
 /**
@@ -52,81 +53,45 @@ export const SignUpForm = () => {
       toast.success('Datos enviados exitosamente');
     }, 1000);
   };
+
+  const signUpFields: FieldList<SignUpSchemaType> = [
+    {
+      label: 'Nombre de Usuario',
+      id: 'userName',
+      type: 'text',
+    },
+    {
+      label: 'Correo Electrónico',
+      id: 'email',
+      type: 'text',
+    },
+    {
+      label: 'Contraseña',
+      id: 'password',
+      type: 'password',
+    },
+    {
+      label: 'Confirmar Contraseña',
+      id: 'confirmPassword',
+      type: 'password',
+    },
+  ];
+
   return (
     <div className='w-[90%] max-w-[23.75rem]'>
       <Text variant='title' className='text-center'>
         Sign Up
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='mb-1'>
-          <label
-            className='font-semibold text-slate-900 dark:text-slate-200'
-            htmlFor='username'
-          >
-            Nombre de Usuario
-          </label>
-          <Input
-            type='text'
-            placeholder='Nombre de Usuario'
-            {...register('userName')}
-            onBlur={() => handleInputChange('userName')}
-            isError={!!errors.userName}
+        {signUpFields.map((field) => (
+          <FormField
+            key={field.id}
+            {...field}
+            register={register}
+            handleInputChange={handleInputChange}
+            errors={errors}
           />
-          {errors.userName && (
-            <span className='font-bold text-red-600'>{errors.userName.message}</span>
-          )}
-        </div>
-        <div className='mb-1'>
-          <label className='font-semibold text-slate-900 dark:text-slate-200' htmlFor='email'>
-            Correo Electrónico
-          </label>
-          <Input
-            type='text'
-            placeholder='Correo Electrónico'
-            {...register('email')}
-            onBlur={() => handleInputChange('email')}
-            isError={!!errors.email}
-          />
-          {errors.email && (
-            <span className='font-bold text-red-600'>{errors.email.message}</span>
-          )}
-        </div>
-        <div className='mb-1'>
-          <label
-            className='font-semibold text-slate-900 dark:text-slate-200'
-            htmlFor='password'
-          >
-            Contraseña
-          </label>
-          <Input
-            type='password'
-            placeholder='Contraseña'
-            {...register('password')}
-            isError={!!errors.password}
-            onBlur={() => handleInputChange('password')}
-          />
-          {errors.password && (
-            <span className='font-bold text-red-600'>{errors.password.message}</span>
-          )}
-        </div>
-        <div className='mb-2'>
-          <label
-            className='font-semibold text-slate-900 dark:text-slate-200'
-            htmlFor='confirm password'
-          >
-            Confirme Contraseña
-          </label>
-          <Input
-            type='password'
-            placeholder='Confirme Contraseña'
-            {...register('confirmPassword')}
-            isError={!!errors.confirmPassword}
-            onBlur={() => handleInputChange('confirmPassword')}
-          />
-          {errors.confirmPassword && (
-            <span className='font-bold text-red-600'>{errors.confirmPassword.message}</span>
-          )}
-        </div>
+        ))}
         <Button type='submit' variant='formSubmit' disabled={isLoading}>
           {isLoading ? <Spinner /> : 'Aceptar'}
         </Button>

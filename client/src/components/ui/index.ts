@@ -4,3 +4,4 @@ export * from './Input/Input';
 export * from './Spinner/Spinner';
 export * from './Text/Text';
 export * from './Text/styles';
+export * from './Accordion/Accordion';

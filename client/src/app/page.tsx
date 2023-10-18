@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Navbar } from '@/components';
 import Link from 'next/link';
+import { Button } from '../components/ui';
 
 export default function Home() {
   return (
@@ -12,6 +13,11 @@ export default function Home() {
         <h1 className='mb-8 text-[2rem] font-extrabold text-slate-700 dark:text-white'>
           Pagina en Construcción
         </h1>
+        <Link href={'/dashboard'}>
+          <Button variant='base' link>
+            Go to Dashboard
+          </Button>
+        </Link>
       </div>
     </main>
   );
