@@ -11,7 +11,10 @@ export const UserSchema = z.object({
       'El nombre de usuario solo puede contener letras, números, guiones y guiones bajos',
     )
     .trim(),
-  email: z.string().email('Introduzca una dirección de correo electrónico válida'),
+  email: z
+    .string()
+    .email('Introduzca una dirección de correo electrónico válida')
+    .max(40, 'El correo electrónico no puede tener más de 30 caracteres'),
   password: z
     .string()
     .min(8, 'La contraseña debe tener al menos 8 caracteres')
