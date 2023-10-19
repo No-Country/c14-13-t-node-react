@@ -28,16 +28,12 @@ export const sidebarData: AccordionItem[] = [
         path: '/dashboard/add-customer',
       },
       {
-        name: 'Actualizar Cliente',
-        path: '/dashboard/update-customer',
-      },
-      {
-        name: 'Borrar Cliente',
-        path: '/dashboard/delete-customer',
-      },
-      {
         name: 'Lista de Clientes',
         path: '/dashboard/customers-list',
+      },
+      {
+        name: 'Detalles de Cliente',
+        path: '/dashboard/customer',
       },
     ],
   },

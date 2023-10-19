@@ -14,7 +14,7 @@ export const UserSchema = z.object({
   email: z
     .string()
     .email('Introduzca una dirección de correo electrónico válida')
-    .max(40, 'El correo electrónico no puede tener más de 30 caracteres'),
+    .max(40, 'El correo electrónico no puede tener más de 40 caracteres'),
   password: z
     .string()
     .min(8, 'La contraseña debe tener al menos 8 caracteres')

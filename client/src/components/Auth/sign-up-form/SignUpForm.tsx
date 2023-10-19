@@ -58,12 +58,11 @@ export const SignUpForm = () => {
     {
       label: 'Nombre de Usuario',
       id: 'userName',
-      type: 'text',
     },
     {
       label: 'Correo Electrónico',
       id: 'email',
-      type: 'text',
+      placeholder: 'correo@ejemplo.com',
     },
     {
       label: 'Contraseña',

@@ -35,7 +35,7 @@ export const SignInForm = () => {
     {
       label: 'Correo Electrónico',
       id: 'email',
-      type: 'text',
+      placeholder: 'correo@ejemplo.com',
     },
     {
       label: 'Contraseña',

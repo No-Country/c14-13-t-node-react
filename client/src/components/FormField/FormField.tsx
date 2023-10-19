@@ -1,5 +1,5 @@
 import type { UseFormRegister, FieldValues, Path, FieldErrors } from 'react-hook-form';
-import { Input } from '@/components/ui';
+import { Input, TextArea } from '@/components/ui';
 
 export type FieldList<T extends FieldValues> = Omit<
   FormFieldProps<T>,
@@ -9,29 +9,37 @@ export type FieldList<T extends FieldValues> = Omit<
 export interface FormFieldProps<T extends FieldValues> {
   label: string;
   id: keyof T;
-  type: 'text' | 'password';
+  type?: 'text' | 'password';
   register: UseFormRegister<T>;
   handleInputChange: (field: keyof T) => void;
   errors: FieldErrors<T>;
+  fieldType?: 'input' | 'textarea';
+  placeholder?: string;
 }
 export const FormField = <T extends FieldValues>({
   label,
   id,
-  type,
+  type = 'text',
+  fieldType = 'input',
+  placeholder,
   register,
   handleInputChange,
   errors,
 }: FormFieldProps<T>) => {
   const isError = !!errors?.[id];
   const errorMessage = String(errors?.[id]?.message);
+  const FieldComponent = fieldType === 'textarea' ? TextArea : Input;
   return (
     <div className='my-2'>
-      <label className='font-semibold text-slate-900 dark:text-slate-200' htmlFor={String(id)}>
-        {label}
+      <label
+        className='text-sm font-medium text-slate-900 dark:text-slate-200'
+        htmlFor={String(id)}
+      >
+        {label}:
       </label>
-      <Input
+      <FieldComponent
         type={type}
-        placeholder={label}
+        placeholder={placeholder ?? label}
         id={String(id)}
         {...register(id as Path<T>)}
         onBlur={() => handleInputChange(id)}
