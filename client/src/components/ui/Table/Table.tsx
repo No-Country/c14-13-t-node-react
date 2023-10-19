@@ -33,7 +33,7 @@ const TableFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
-    className={cn('bg-primary text-primary-foreground font-medium', className)}
+    className={cn('bg-slate-300 font-medium text-slate-700 dark:text-slate-200', className)}
     {...props}
   />
 ));
@@ -46,7 +46,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
+      'data-[state=selected]:bg-muted border-b transition-colors hover:bg-slate-300/50',
       className,
     )}
     {...props}
@@ -61,7 +61,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'text-muted-foreground h-12 px-4 text-left align-middle font-medium [&:has([role=checkbox])]:pr-0',
+      'h-12 px-4 text-left align-middle font-medium text-slate-700 [&:has([role=checkbox])]:pr-0',
       className,
     )}
     {...props}
@@ -75,7 +75,7 @@ const TableCell = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)}
+    className={cn('p-4 align-middle text-slate-700 [&:has([role=checkbox])]:pr-0', className)}
     {...props}
   />
 ));
@@ -85,11 +85,7 @@ const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,
   React.HTMLAttributes<HTMLTableCaptionElement>
 >(({ className, ...props }, ref) => (
-  <caption
-    ref={ref}
-    className={cn('text-muted-foreground mt-4 text-sm', className)}
-    {...props}
-  />
+  <caption ref={ref} className={cn('mt-4 text-sm text-slate-900', className)} {...props} />
 ));
 TableCaption.displayName = 'TableCaption';
 
