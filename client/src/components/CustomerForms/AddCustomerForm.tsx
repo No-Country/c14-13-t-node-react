@@ -7,11 +7,32 @@ import { z } from 'zod';
 import { Text, Button, Spinner } from '@/components/ui';
 import { FormField, type FieldList } from '@/components';
 import { toast } from 'sonner';
+import { AxiosError } from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { registerCustomer } from '@/services/customerService';
+import { useQuery } from '@tanstack/react-query';
+import { getCustomers } from '@/services/customerService';
+import { Customer } from '@/types/common';
 
 type CustomerFormSchemaType = z.infer<typeof CustomerCreationSchema>;
 
 export const AddCustomerForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (data: CustomerFormSchemaType) => {
+      return registerCustomer(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['customers'], { refetchType: 'all' });
+      //Otra manera de actualizar el cache es tomar la respuesta de la mutation y añadirlo al cache:
+      // queryClient.setQueriesData(['customers'], (oldData) => {
+      //   return {
+      //     customers: [...(oldData as { customers: Customer[] })?.customers, data.customer],
+      //   };
+      // });
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -26,18 +47,30 @@ export const AddCustomerForm = () => {
 
   const onSubmit: SubmitHandler<CustomerFormSchemaType> = (data) => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      toast.success('Datos enviados exitosamente');
-      console.log(data);
-    }, 1000);
+    mutation.mutate(data, {
+      onSuccess: () => {
+        toast.success('Cliente registrado exitosamente');
+        reset();
+        setIsLoading(false);
+      },
+      onError: (error) => {
+        console.log(error);
+        if (error instanceof AxiosError) {
+          toast.error(error.response?.data.message);
+          setIsLoading(false);
+        } else {
+          toast.error('Error al enviar los datos');
+        }
+      },
+    });
   };
 
   const createCustomerFields: FieldList<CustomerFormSchemaType> = [
     {
-      id: 'name',
+      id: 'firstName',
       label: 'Nombre',
     },
+    { id: 'lastName', label: 'Apellido' },
     {
       id: 'dni',
       label: 'DNI',

@@ -7,29 +7,40 @@ import { z } from 'zod';
 import { Text, Button, Spinner } from '@/components/ui';
 import { FormField, type FieldList } from '@/components';
 import { toast } from 'sonner';
+import Link from 'next/link';
+import OautButtons from '../oauth-buttons/OautButtons';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type SignInSchemaType = z.infer<typeof SignInSchema>;
 
 export const SignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     trigger,
-    reset,
+    // reset,
   } = useForm<SignInSchemaType>({ resolver: zodResolver(SignInSchema) });
 
   const handleInputChange = async (field: keyof SignInSchemaType) => {
     await trigger(field);
   };
 
-  const onSubmit: SubmitHandler<SignInSchemaType> = ({ email, password }) => {
+  const onSubmit: SubmitHandler<SignInSchemaType> = async ({ email, password }) => {
     setIsLoading(true);
-    setTimeout(() => {
+    const res = await signIn('credentials', { email, password, redirect: false });
+    if (!res?.ok && res?.error) {
+      toast.error(res.error);
       setIsLoading(false);
-      toast.success('Entrando');
-    }, 1000);
+      return;
+    }
+    toast.success('Ingresando al sistema');
+    setIsLoading(false);
+    router.refresh();
+    router.push('/dashboard');
   };
   const signInFields: FieldList<SignInSchemaType> = [
     {
@@ -62,6 +73,14 @@ export const SignInForm = () => {
           {isLoading ? <Spinner /> : 'Aceptar'}
         </Button>
       </form>
+
+      <OautButtons />
+      <p className='pb-6 text-center text-black dark:text-white'>
+        ¿No tienes una cuenta?{' '}
+        <Link href='/auth/sign-up' className='text-blue-600'>
+          Regístrate
+        </Link>{' '}
+      </p>
     </div>
   );
 };

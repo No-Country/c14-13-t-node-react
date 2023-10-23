@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../components/ui';
 import SignIn from '../components/SignIn';
-import LogSession from '../components/logSession';
 
 export default function Home() {
   return (
@@ -20,7 +19,6 @@ export default function Home() {
           </Button>
         </Link>
         <SignIn />
-        <LogSession />
       </div>
     </main>
   );

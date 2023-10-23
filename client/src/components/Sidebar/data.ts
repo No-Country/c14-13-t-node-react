@@ -7,6 +7,7 @@ type AccordionItem = {
 type route = {
   name: string;
   path: string;
+  adminOnly?: boolean;
 };
 export const sidebarData: AccordionItem[] = [
   {
@@ -58,6 +59,11 @@ export const sidebarData: AccordionItem[] = [
         path: '/dashboard/customers-list',
       },
     ],
+  },
+  {
+    Icon: Users,
+    title: 'Usuarios',
+    routes: [{ name: 'Lista de usuarios', path: '/dashboard/users-list', adminOnly: true }],
   },
   {
     Icon: Car,

@@ -41,15 +41,15 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String   @unique
+  email         String    @unique
   emailVerified DateTime?
   username      String?   @unique
   password      String?
   image         String?
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime?  @updatedAt
-  isActivated   Boolean   @default(false)
-  role          String    @default("user")
+  updatedAt     DateTime? @updatedAt
+  isActivated   Boolean   @default(false) @map("is_active")
+  role          RoleType  @default(guest)
   accounts      Account[]
   sessions      Session[]
 }
@@ -60,4 +60,106 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Customer {
+  id       Int       @id @default(autoincrement())
+  dni      String    @unique
+  firstName String    @map("first_name")
+  lastName String    @map("last_name")
+  email    String    @unique
+  phone    String
+  address  String
+  city     String
+  isActive Boolean   @default(true) @map("is_active")
+  vehicles Vehicle[]
+}
+
+model Vehicle {
+  id          Int      @id @default(autoincrement())
+  plate       String
+  brand       String
+  model       String
+  comments    String?
+  vehicleType String   @map("vehicle_type")
+  mileage     String?
+  year        String
+  color       String
+  doors       String
+  customerId  Int      @map("customer_id")
+  customer    Customer @relation(fields: [customerId], references: [id])
+  orders      Order[]
+}
+
+model Workshop {
+  id      Int     @id @default(autoincrement())
+  nit     String
+  name    String
+  address String
+  email   String
+  phone   String
+  orders  Order[]
+}
+
+model Order {
+  id            Int            @id @default(autoincrement())
+  entryDate     DateTime       @map("entry_date")
+  departureDate DateTime       @map("departure_date")
+  deadline      DateTime
+  cost          Float
+  workshopId    Int            @map("workshop_id")
+  mechanicId    Int            @map("mechanic_id")
+  vehicleId     Int            @map("vehicle_id")
+  employeeId    Int            @map("employess_id")
+  workshop      Workshop       @relation(fields: [workshopId], references: [id])
+  mechanic      Mechanic       @relation(fields: [mechanicId], references: [id])
+  vehicle       Vehicle        @relation(fields: [vehicleId], references: [id])
+  employess     Employee       @relation(fields: [employeeId], references: [id])
+  orderServices OrderService[]
+}
+
+model Mechanic {
+  id       Int     @id @default(autoincrement())
+  dni      String  @unique
+  name     String
+  address  String
+  city     String
+  phone    String
+  isActive Boolean @default(true) @map("is_active")
+  orders   Order[]
+}
+
+model Service {
+  id            Int            @id @default(autoincrement())
+  serviceCode   String         @map("service_code")
+  service       String
+  description   String
+  servicePrice  Float          @map("service_price")
+  isActive      Boolean        @default(true) @map("is_active")
+  orderServices OrderService[]
+}
+
+model OrderService {
+  id        Int     @id @default(autoincrement())
+  orderId   Int     @map("order_id")
+  serviceId Int     @map("service_id")
+  order     Order   @relation(fields: [orderId], references: [id])
+  service   Service @relation(fields: [serviceId], references: [id])
+}
+
+model Employee {
+  id       Int     @id @default(autoincrement())
+  dni      String  @unique
+  name     String
+  address  String
+  city     String
+  phone    String
+  isActive Boolean @default(true) @map("is_active")
+  orders   Order[]
+}
+
+enum RoleType {
+  guest
+  user
+  admin
 }
