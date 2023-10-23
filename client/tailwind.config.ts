@@ -20,6 +20,14 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
         rotationBackwards: {
           '0%': {
             transform: 'rotate(45deg)',
@@ -54,8 +62,13 @@ const config: Config = {
       rotationForward: 'rotationForward 0.3s ease-in-out',
       rotationBackwards: 'rotationBackwards 0.3s ease-in-out',
       spin: 'spin 1s linear infinite',
+      'accordion-down': 'accordion-down 0.2s ease-out',
+      'accordion-up': 'accordion-up 0.2s ease-out',
+    },
+    boxShadow: {
+      right: '10px 0 15px -3px rgba(0, 0, 0, 0.12), 4px 0 6px -2px rgba(0, 0, 0, 0.08)',
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 };
 export default config;

@@ -2,10 +2,17 @@
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SignUpSchema } from '@/schemas/AuthSchema';
+import Link from 'next/link';
 import { z } from 'zod';
-import { Text, Button, Input, Spinner } from '@/components/ui';
 import { toast } from 'sonner';
+import { useMutation } from '@tanstack/react-query';
+import { Text, Button, Spinner } from '@/components/ui';
+import { FormField, type FieldList } from '@/components';
+import { SignUpSchema } from '@/schemas/AuthSchema';
+import { registerUser } from '@/services/userService';
+import OautButtons from '../oauth-buttons/OautButtons';
+import { signIn } from 'next-auth/react';
+import { AxiosError } from 'axios';
 
 /**
  * Este Type representa los campos del Formulario.
@@ -22,6 +29,11 @@ type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 export const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const mutation = useMutation({
+    mutationFn: ({ username, email, password }: Omit<SignUpSchemaType, 'confirmPassword'>) => {
+      return registerUser({ username, email, password });
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -45,92 +57,78 @@ export const SignUpForm = () => {
     await trigger(field);
   };
 
-  const onSubmit: SubmitHandler<SignUpSchemaType> = ({ userName, email, password }) => {
+  const onSubmit: SubmitHandler<SignUpSchemaType> = async ({ username, email, password }) => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      toast.success('Datos enviados exitosamente');
-    }, 1000);
+    mutation.mutate(
+      { username, email, password },
+      {
+        onSuccess: () => {
+          toast.success('Registrado exitosamente');
+          reset();
+          setIsLoading(false);
+          signIn('credentials', { email, password, callbackUrl: '/dashboard' });
+        },
+        onError: (error) => {
+          console.log(error);
+          if (error instanceof AxiosError) {
+            toast.error(error.response?.data.message);
+            setIsLoading(false);
+          } else {
+            toast.error('Error al enviar los datos');
+          }
+        },
+      },
+    );
   };
+
+  const signUpFields: FieldList<SignUpSchemaType> = [
+    {
+      label: 'Nombre de Usuario',
+      id: 'username',
+    },
+    {
+      label: 'Correo Electrónico',
+      id: 'email',
+      placeholder: 'correo@ejemplo.com',
+    },
+    {
+      label: 'Contraseña',
+      id: 'password',
+      type: 'password',
+    },
+    {
+      label: 'Confirmar Contraseña',
+      id: 'confirmPassword',
+      type: 'password',
+    },
+  ];
+
   return (
     <div className='w-[90%] max-w-[23.75rem]'>
       <Text variant='title' className='text-center'>
         Sign Up
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='mb-1'>
-          <label
-            className='font-semibold text-slate-900 dark:text-slate-200'
-            htmlFor='username'
-          >
-            Nombre de Usuario
-          </label>
-          <Input
-            type='text'
-            placeholder='Nombre de Usuario'
-            {...register('userName')}
-            onBlur={() => handleInputChange('userName')}
-            isError={!!errors.userName}
+        {signUpFields.map((field) => (
+          <FormField
+            key={field.id}
+            {...field}
+            register={register}
+            handleInputChange={handleInputChange}
+            errors={errors}
           />
-          {errors.userName && (
-            <span className='font-bold text-red-600'>{errors.userName.message}</span>
-          )}
-        </div>
-        <div className='mb-1'>
-          <label className='font-semibold text-slate-900 dark:text-slate-200' htmlFor='email'>
-            Correo Electrónico
-          </label>
-          <Input
-            type='text'
-            placeholder='Correo Electrónico'
-            {...register('email')}
-            onBlur={() => handleInputChange('email')}
-            isError={!!errors.email}
-          />
-          {errors.email && (
-            <span className='font-bold text-red-600'>{errors.email.message}</span>
-          )}
-        </div>
-        <div className='mb-1'>
-          <label
-            className='font-semibold text-slate-900 dark:text-slate-200'
-            htmlFor='password'
-          >
-            Contraseña
-          </label>
-          <Input
-            type='password'
-            placeholder='Contraseña'
-            {...register('password')}
-            isError={!!errors.password}
-            onBlur={() => handleInputChange('password')}
-          />
-          {errors.password && (
-            <span className='font-bold text-red-600'>{errors.password.message}</span>
-          )}
-        </div>
-        <div className='mb-2'>
-          <label
-            className='font-semibold text-slate-900 dark:text-slate-200'
-            htmlFor='confirm password'
-          >
-            Confirme Contraseña
-          </label>
-          <Input
-            type='password'
-            placeholder='Confirme Contraseña'
-            {...register('confirmPassword')}
-            isError={!!errors.confirmPassword}
-            onBlur={() => handleInputChange('confirmPassword')}
-          />
-          {errors.confirmPassword && (
-            <span className='font-bold text-red-600'>{errors.confirmPassword.message}</span>
-          )}
-        </div>
+        ))}
         <Button type='submit' variant='formSubmit' disabled={isLoading}>
           {isLoading ? <Spinner /> : 'Aceptar'}
         </Button>
       </form>
+      <OautButtons />
+      <p className='pb-6 text-center text-black dark:text-white'>
+        ¿Ya tienes una cuenta?{' '}
+        <Link href='/auth/sign-in' className='text-blue-600'>
+          Inicia Sesión
+        </Link>{' '}
+      </p>
     </div>
   );
 };

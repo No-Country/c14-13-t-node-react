@@ -3,4 +3,7 @@ export * from './Button/styles';
 export * from './Input/Input';
 export * from './Spinner/Spinner';
 export * from './Text/Text';
+export * from './Table/Table';
 export * from './Text/styles';
+export * from './TextArea/TextArea';
+export * from './Accordion/Accordion';
