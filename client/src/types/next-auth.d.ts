@@ -25,6 +25,7 @@ declare module 'next-auth/jwt' {
       id: string;
       role: string;
       isActivated: boolean;
+      username: string | null;
     };
   }
 }

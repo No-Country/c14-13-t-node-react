@@ -14,6 +14,7 @@ export const ThemeToggle = () => {
    */
   useEffect(() => {
     setIsMounted(!isMounted);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); //En este caso ESlint esta equivocado
 
   let icon: string | null = null;

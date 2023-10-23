@@ -13,7 +13,7 @@ const config = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
-    'react/prop-types': 'warn',
+    'react/prop-types': 'off',
     'no-void': 'off',
   },
 };
