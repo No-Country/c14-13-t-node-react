@@ -1,23 +1,25 @@
 import { z } from 'zod';
+import { PersonSchema } from './PersonSchema';
 
-export const CustomerSchema = z.object({
-  id: z.number().int(),
-  name: z
-    .string()
-    .min(4, 'El nombre debe tener al menos 4 caracteres')
-    .max(55, 'El nombre no puede tener más de 55 caracteres'),
+export const CustomerSchema = PersonSchema.extend({
   dni: z
     .string()
     .min(6, 'El DNI debe tener al menos 6 caracteres')
-    .max(25, 'El DNI no puede tener más de 25 caracteres'),
-  email: z
-    .string()
-    .email('Introduzca una dirección de correo electrónico válida')
-    .max(40, 'El correo electrónico no puede tener más de 40 caracteres'),
+    .max(25, 'El DNI no puede tener más de 25 caracteres')
+    .regex(
+      /^[a-zA-Z0-9_-]+$/,
+      'El DNI solo puede contener letras, números, guiones y guiones bajos',
+    )
+    .trim(),
   phone: z
     .string()
     .min(6, 'El teléfono debe tener al menos 6 caracteres')
-    .max(25, 'El teléfono no puede tener más de 25 caracteres'),
+    .max(25, 'El teléfono no puede tener más de 25 caracteres')
+    .regex(
+      /^[0-9_-]+$/,
+      'El numero de teléfono solo puede tener números, guiones y guiones bajos',
+    )
+    .trim(),
   address: z
     .string()
     .min(4, 'La dirección debe tener al menos 4 caracteres')
@@ -28,4 +30,4 @@ export const CustomerSchema = z.object({
     .max(35, 'La ciudad no puede tener más de 35 caracteres'),
 });
 
-export const CustomerCreationSchema = CustomerSchema.omit({ id: true });
+export const CustomerCreationSchema = CustomerSchema;

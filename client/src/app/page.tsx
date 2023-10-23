@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../components/ui';
+import SignIn from '../components/SignIn';
 
 export default function Home() {
   return (
-    <main className='flex h-auto min-h-screen w-full flex-col items-center justify-center overflow-scroll bg-white transition-colors duration-300 dark:bg-primary-background'>
-      <div className='flex w-full flex-col items-center justify-center gap-8'>
+    <main className='flex h-auto min-h-screen w-full flex-col items-center bg-white transition-colors duration-300 dark:bg-primary-background'>
+      <div className='flex w-full flex-col items-center justify-center gap-8 py-10'>
         <div className='relative h-60 w-60 overflow-hidden rounded-full'>
           <Image src={'/images/pandas.png'} alt='pandas' fill />
         </div>
@@ -17,6 +18,7 @@ export default function Home() {
             Go to Dashboard
           </Button>
         </Link>
+        <SignIn />
       </div>
     </main>
   );
