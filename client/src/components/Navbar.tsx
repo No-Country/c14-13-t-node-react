@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/components';
 import { Button } from '@/components/ui';
 import { CarFront } from 'lucide-react';
+import { UserDropdown } from './UserDropdown';
 
 export const Navbar = () => {
   const { data: session } = useSession();
@@ -14,32 +15,29 @@ export const Navbar = () => {
         {/* <CarFront size={20} /> */}
         GarageGuest
       </Link>
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-5'>
         <ThemeToggle />
-        {session ? (
-          <div className='flex gap-2 text-slate-800 dark:text-slate-200'>
-            {name}
-            <button
-              className='rounded-full bg-blue-300 px-3 py-2 text-black'
-              onClick={() => void signOut()}
-            >
-              sign out
-            </button>
-          </div>
-        ) : (
-          <>
-            <Link href='/auth/sign-up'>
-              <Button variant='NavButton1' link>
-                SignUp
-              </Button>
-            </Link>
-            <Link href='/auth/sign-in' className='overflow-visible'>
-              <Button variant='NavButton2' link>
-                SignIn
-              </Button>
-            </Link>
-          </>
-        )}
+        <div className='flex items-center justify-center gap-4'>
+          {session ? (
+            <div className='flex items-center gap-3 text-slate-800 dark:text-slate-200'>
+              {name}
+              <UserDropdown />
+            </div>
+          ) : (
+            <>
+              <Link href='/auth/sign-up'>
+                <Button variant='NavButton1' link>
+                  SignUp
+                </Button>
+              </Link>
+              <Link href='/auth/sign-in' className='overflow-visible'>
+                <Button variant='NavButton2' link>
+                  SignIn
+                </Button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );

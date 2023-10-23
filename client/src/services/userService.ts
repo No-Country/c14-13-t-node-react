@@ -1,7 +1,8 @@
 import axios from 'axios';
 import type { SessionUser, NewUser } from '@/types/common';
+import { getBaseUrl } from '@/utils/getUrl';
 
-const BASE_URL = 'http://localhost:3000/api/'; //En producción debería cambiar
+const BASE_URL = `${getBaseUrl()}/api/`; //En producción debería cambiar
 
 const axiosClient = axios.create({ baseURL: BASE_URL });
 
