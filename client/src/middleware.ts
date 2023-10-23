@@ -1,10 +1,12 @@
 import { getToken } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getBaseUrl } from '@/utils/getUrl';
 
 const protectedApiRoutes = ['/api/costumers', '/api/vehicles'];
 const onlyAdminApiRoutes = ['/api/data'];
 const onlyAdminRoutes = ['/dashboard/users-list'];
+const baseUrl = getBaseUrl();
 
 export default async function middleware(req: NextRequest) {
   const token = await getToken({ req });
@@ -39,9 +41,9 @@ export default async function middleware(req: NextRequest) {
    * Routes or Pages:
    */
   if (!token && req.nextUrl.pathname.includes('/dashboard')) {
-    return NextResponse.redirect('http://localhost:3000/auth/sign-in');
+    return NextResponse.redirect(`${baseUrl}/auth/sign-in`);
   }
   if (token && !isAdmin && isOnlyAdminRoute) {
-    return NextResponse.redirect('http://localhost:3000/dashboard');
+    return NextResponse.redirect(`${baseUrl}/dashboard`);
   }
 }

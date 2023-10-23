@@ -12,6 +12,8 @@ export const buttonVariants = cva('disabled:pointer-events-none', {
         'rounded-full bg-white px-5 py-[0.375rem] font-semibold text-slate-900 ring-1 ring-slate-900/40 transition-colors duration-300 ease-in hover:bg-slate-300',
       OauthButton:
         'flex w-full transform items-center justify-center gap-3 rounded-xl border border-gray-300  py-2 text-base font-semibold  text-gray-700 transition-all ease-in-out hover:bg-gray-200 active:bg-gray-100 active:duration-75 ',
+      navbar:
+        'flex items-center justify-center rounded-full border-[#5f63f2] bg-[#5f63f2] p-2 text-base font-medium text-white hover:border-[#8c94ff] hover:bg-[#8c94ff]',
     },
   },
   defaultVariants: {
