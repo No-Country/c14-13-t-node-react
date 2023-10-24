@@ -20,7 +20,6 @@ export const UsersTable = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {String(error)}</div>;
-  console.log(data);
   return (
     <>
       <div className='mb-4 text-slate-800 dark:text-white'>Lista de Usuarios</div>

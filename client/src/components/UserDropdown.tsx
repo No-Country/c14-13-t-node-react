@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/';
-
+import { getBaseUrl } from '@/utils/getUrl';
 export function UserDropdown() {
   return (
     <DropdownMenu>
@@ -21,7 +21,10 @@ export function UserDropdown() {
       <DropdownMenuContent className='w-40'>
         <DropdownMenuItem className='group'>
           <LogOut className='mr-2 h-4 w-4 duration-300 group-hover:translate-x-1' />
-          <button title='Cerrar Sesión' onClick={() => signOut()}>
+          <button
+            title='Cerrar Sesión'
+            onClick={() => signOut({ callbackUrl: `${getBaseUrl()}/auth/sign-in` })}
+          >
             Cerrar Sesión
           </button>
         </DropdownMenuItem>

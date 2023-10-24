@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/components';
 import { Button } from '@/components/ui';
-import { CarFront } from 'lucide-react';
 import { UserDropdown } from './UserDropdown';
 
 export const Navbar = () => {

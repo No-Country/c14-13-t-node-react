@@ -87,7 +87,7 @@ export const AddCustomerForm = () => {
     {
       id: 'phone',
       label: 'Teléfono',
-      placeholder: '+51 999 999 999',
+      placeholder: '51 999 999 999',
     },
     {
       id: 'address',
