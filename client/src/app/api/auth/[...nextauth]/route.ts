@@ -69,7 +69,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
         const existingUser = await existingUserByEmail(credentials.email);
         if (!existingUser) {
-          throw new Error('No existe un usuario con ese email');
+          throw new Error('Error en los datos de inicio de sesión');
         }
         if (!existingUser.password) {
           //Si el usuario existe y no tiene contraseña es porque utilizo un proveedor externo
