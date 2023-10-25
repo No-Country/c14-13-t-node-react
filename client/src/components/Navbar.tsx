@@ -9,7 +9,7 @@ export const Navbar = () => {
   const { data: session } = useSession();
   const name = session?.user.name ?? session?.user.username ?? 'Guest';
   return (
-    <header className='flex h-10 w-full items-center justify-between gap-4 border-b border-slate-400 bg-white px-4 py-6 pr-10 transition-colors duration-300 dark:bg-primary-lightBackground'>
+    <header className='flex h-10 w-full items-center justify-between gap-4 border-b border-slate-400/30 bg-white px-4 py-6 pr-10 transition-colors duration-300 dark:bg-primary-lightBackground'>
       <Link href={'/'} className='flex gap-2 text-base font-bold text-black dark:text-white'>
         {/* <CarFront size={20} /> */}
         GarageGuest
