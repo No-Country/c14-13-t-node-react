@@ -125,7 +125,7 @@ export const SignUpForm = () => {
       <OautButtons />
       <p className='pb-6 text-center text-black dark:text-white'>
         ¿Ya tienes una cuenta?{' '}
-        <Link href='/auth/sign-in' className='text-blue-600'>
+        <Link href='/auth/sign-in' className='text-blue-600 hover:text-blue-400'>
           Inicia Sesión
         </Link>{' '}
       </p>

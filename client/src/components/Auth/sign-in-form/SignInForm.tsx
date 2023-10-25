@@ -77,7 +77,7 @@ export const SignInForm = () => {
       <OautButtons />
       <p className='pb-6 text-center text-black dark:text-white'>
         ¿No tienes una cuenta?{' '}
-        <Link href='/auth/sign-up' className='text-blue-600'>
+        <Link href='/auth/sign-up' className='text-blue-600 hover:text-blue-400'>
           Regístrate
         </Link>{' '}
       </p>
