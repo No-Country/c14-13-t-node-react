@@ -17,6 +17,14 @@ const createText = (variant: TextProps['variant']) => {
       return 'span';
     case 'title':
       return 'h1';
+    case 'detailsTitle':
+      return 'h2';
+    case 'detailsLabel':
+      return 'span';
+    case 'detailsValue':
+      return 'span';
+    case 'specialTitle':
+      return 'h1';
     default:
       throw new Error('Text Variant not supported');
   }

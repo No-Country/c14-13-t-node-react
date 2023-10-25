@@ -1,12 +1,20 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { ThemeProvider, QueryProvider, NextAuthProvider } from './_Providers';
-import { Inter } from 'next/font/google';
+import { Inter, Abril_Fatface } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/Navbar';
 
 const inter = Inter({
   subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+const abrilFatface = Abril_Fatface({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-abril-fatface',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -17,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='es' suppressHydrationWarning>
-      <body className={`${inter.className}`}>
+      <body className={`${inter.variable} ${abrilFatface.variable}`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <NextAuthProvider>
             <QueryProvider>
