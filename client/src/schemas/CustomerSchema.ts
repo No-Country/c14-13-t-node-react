@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { PersonSchema } from './PersonSchema';
 
-export const CustomerSchema = PersonSchema.extend({
+export const CustomerBaseSchema = PersonSchema.extend({
   dni: z
     .string()
     .min(6, 'El DNI debe tener al menos 6 caracteres')
@@ -30,4 +30,9 @@ export const CustomerSchema = PersonSchema.extend({
     .max(35, 'La ciudad no puede tener más de 35 caracteres'),
 });
 
-export const CustomerCreationSchema = CustomerSchema;
+export const CustomerCreationSchema = CustomerBaseSchema;
+
+export const CustomerSchema = CustomerBaseSchema.extend({
+  id: z.number().int().positive(),
+  isActive: z.boolean(),
+});

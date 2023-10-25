@@ -17,3 +17,8 @@ export const getCustomers = async () => {
   const result = await axiosClient.get<{ customers: Customer[] }>('/customers');
   return result.data;
 };
+
+export const getCustomerById = async (id: number) => {
+  const result = await axiosClient.get<{ customer: Customer }>(`/customers/${id}`);
+  return result.data;
+};
