@@ -15,7 +15,7 @@ export const handlePrismaError = (error: Prisma.PrismaClientKnownRequestError) =
     case 'P2002':
       return NextResponse.json(
         {
-          message: 'Ya existe un usuario con este email o nombre de usuario',
+          message: 'Ya existe este registro',
           error,
         },
         { status: 409 },
