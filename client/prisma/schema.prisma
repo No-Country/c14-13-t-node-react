@@ -111,11 +111,11 @@ model Order {
   workshopId    Int            @map("workshop_id")
   mechanicId    Int            @map("mechanic_id")
   vehicleId     Int            @map("vehicle_id")
-  employeeId    Int            @map("employess_id")
+  employeeId    Int            @map("employees_id")
   workshop      Workshop       @relation(fields: [workshopId], references: [id])
   mechanic      Mechanic       @relation(fields: [mechanicId], references: [id])
   vehicle       Vehicle        @relation(fields: [vehicleId], references: [id])
-  employess     Employee       @relation(fields: [employeeId], references: [id])
+  employees     Employee       @relation(fields: [employeeId], references: [id])
   orderServices OrderService[]
 }
 

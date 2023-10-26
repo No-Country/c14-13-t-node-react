@@ -70,7 +70,7 @@ CREATE TABLE "Order" (
     "workshop_id" INTEGER NOT NULL,
     "mechanic_id" INTEGER NOT NULL,
     "vehicle_id" INTEGER NOT NULL,
-    "employess_id" INTEGER NOT NULL,
+    "employees_id" INTEGER NOT NULL,
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
 );
@@ -147,7 +147,7 @@ ALTER TABLE "Order" ADD CONSTRAINT "Order_mechanic_id_fkey" FOREIGN KEY ("mechan
 ALTER TABLE "Order" ADD CONSTRAINT "Order_vehicle_id_fkey" FOREIGN KEY ("vehicle_id") REFERENCES "Vehicle"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Order" ADD CONSTRAINT "Order_employess_id_fkey" FOREIGN KEY ("employess_id") REFERENCES "Employee"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Order" ADD CONSTRAINT "Order_employees_id_fkey" FOREIGN KEY ("employees_id") REFERENCES "Employee"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "OrderService" ADD CONSTRAINT "OrderService_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "Order"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
