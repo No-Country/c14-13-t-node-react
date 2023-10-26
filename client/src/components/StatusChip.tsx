@@ -4,7 +4,7 @@ interface StatusChipProps {
   isActive: boolean;
 }
 
-const StatusChip = ({ isActive }: StatusChipProps) => {
+export const StatusChip = ({ isActive }: StatusChipProps) => {
   return (
     <>
       {isActive ? (
@@ -19,5 +19,3 @@ const StatusChip = ({ isActive }: StatusChipProps) => {
     </>
   );
 };
-
-export default StatusChip;

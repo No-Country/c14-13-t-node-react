@@ -3,14 +3,13 @@ import React from 'react';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
   Text,
 } from '@/components/ui';
-import ActionsButtons from '../ActionsButtons';
+import { ActionsButtons } from '../ActionsButtons';
 import { FullOrder } from '@/types/common';
 
 interface NewstOrdersTableProps {

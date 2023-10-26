@@ -14,7 +14,7 @@ interface ActionsButtonsProps {
     | 'services';
 }
 
-const ActionsButtons = ({ id, category }: ActionsButtonsProps) => {
+export const ActionsButtons = ({ id, category }: ActionsButtonsProps) => {
   return (
     <div className='flex items-center gap-3'>
       <Link
@@ -30,5 +30,3 @@ const ActionsButtons = ({ id, category }: ActionsButtonsProps) => {
     </div>
   );
 };
-
-export default ActionsButtons;
