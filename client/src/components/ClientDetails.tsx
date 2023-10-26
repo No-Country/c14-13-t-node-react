@@ -44,7 +44,6 @@ const ClientDetails = ({ id }: { id: number }) => {
     { label: 'Ciudad', value: customer?.customer.city },
     { label: 'Estatus', value: customer?.customer.isActive ? 'Activo' : 'Inactivo' },
   ];
-  console.log(customer);
   return (
     <div className='flex h-full w-full pt-6'>
       <DetailsCard title='Datos del Cliente' infoRows={infoRows} />

@@ -10,6 +10,8 @@ export const textVariants = cva('', {
       detailsLabel: 'text-sm font-medium text-slate-900 dark:text-slate-200',
       detailsValue: 'text-sm font-normal text-slate-700 dark:text-slate-300',
       specialTitle: 'font-abril text-2xl font-bold text-[#5f63f2] dark:text-[#5f63f2]',
+      statisticsValue: 'text-3xl font-bold text-slate-900 dark:text-slate-200',
+      statisticsDescription: 'text-lg font-medium text-slate-900/80 dark:text-slate-200/80',
     },
   },
   defaultVariants: {

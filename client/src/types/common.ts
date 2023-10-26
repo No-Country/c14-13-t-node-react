@@ -12,3 +12,63 @@ export type SessionUser = ExtractProperties<Session['user']>;
 export type NewUser = z.infer<typeof AuthBaseSchema>;
 export type NewCustomer = z.infer<typeof CustomerCreationSchema>;
 export type Customer = NewCustomer & { id: number; isActive: boolean };
+
+export type Statistics = {
+  counters: {
+    usersCount: number;
+    clientsCount: number;
+    ordersCount: number;
+    servicesCount: number;
+    vehiclesCount: number;
+  };
+  totalSales: number;
+  popularServices: {
+    topServices: {
+      serviceName: string;
+      count: number;
+      total: number;
+    }[];
+    otherServices: {
+      serviceName: string;
+      count: number;
+      total: number;
+    }[];
+  };
+  newOrders: FullOrder[];
+};
+
+export type FullOrder = {
+  id: number;
+  entryDate: string;
+  departureDate: string;
+  deadline: string;
+  cost: number;
+  workshopId: number;
+  mechanicId: number;
+  vehicleId: number;
+  employeeId: number;
+  vehicle: {
+    plate: string;
+    customer: {
+      id: number;
+      firstName: string;
+      lastName: string;
+    };
+  };
+  orderServices: {
+    serviceId: number;
+    service: {
+      serviceCode: string;
+      service: string;
+    };
+  }[];
+  workshop: {
+    name: string;
+  };
+  employees: {
+    name: string;
+  };
+  mechanic: {
+    name: string;
+  };
+};

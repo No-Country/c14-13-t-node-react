@@ -25,11 +25,15 @@ const createText = (variant: TextProps['variant']) => {
       return 'span';
     case 'specialTitle':
       return 'h1';
+    case 'statisticsValue':
+      return 'p';
+    case 'statisticsDescription':
+      return 'p';
     default:
       throw new Error('Text Variant not supported');
   }
 };
-export const Text = ({ className, variant, ...props }: TextProps) => {
+export const Text = ({ className, variant = 'body', ...props }: TextProps) => {
   const TextElement = createText(variant);
   return <TextElement className={cn(textVariants({ variant, className }))} {...props} />;
 };

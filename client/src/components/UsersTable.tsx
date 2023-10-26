@@ -24,7 +24,7 @@ export const UsersTable = ({ children }: { children: React.ReactNode }) => {
   if (isLoading) return <>{children}</>;
   if (isError) return <div>Error: {String(error)}</div>;
   return (
-    <div className='w-full pt-4'>
+    <div className='w-full rounded-3xl bg-gray-100 pt-4 dark:bg-inherit'>
       <Text variant='title' className='mb-4 text-center text-slate-800 dark:text-white'>
         Lista de Usuarios
       </Text>
@@ -42,7 +42,7 @@ export const UsersTable = ({ children }: { children: React.ReactNode }) => {
         <TableBody>
           {data.users.map(({ name, username, id, isActivated, email, role }) => (
             <TableRow key={name ?? username}>
-              <TableCell className='font-medium'>{name ?? username}</TableCell>
+              <TableCell>{name ?? username}</TableCell>
               <TableCell>{email}</TableCell>
               <TableCell>
                 <StatusChip isActive={isActivated} />

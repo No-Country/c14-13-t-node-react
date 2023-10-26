@@ -29,6 +29,23 @@
     --popover: 224 71% 4%;
     --popover-foreground: 215 20.2% 65.1%;
   }
+  .dark span.apexcharts-legend-text {
+    color: rgba(255, 255, 255, 0.91) !important;
+    font-size: 1rem !important;
+  }
+  span.apexcharts-legend-text {
+    color: rgb(64, 64, 64) !important;
+    font-size: 1rem !important;
+  }
+  .apexcharts-legend {
+    padding-left: 2rem !important;
+  }
+  /* .apexcharts-title-text {
+    color: rgb(64, 64, 64) !important;
+  }
+  .dark .apexcharts-title-text {
+    color: rgba(255, 255, 255, 0.91) !important;
+  } */
 }
 
 @media (prefers-color-scheme: dark) {

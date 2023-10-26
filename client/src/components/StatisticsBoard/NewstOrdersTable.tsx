@@ -1,0 +1,74 @@
+'use client';
+import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Text,
+} from '@/components/ui';
+import ActionsButtons from '../ActionsButtons';
+import { FullOrder } from '@/types/common';
+
+interface NewstOrdersTableProps {
+  orders: FullOrder[];
+}
+
+const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
+  const tableHead = ['Orden', 'Cliente', 'Vehículo', 'Servicio', 'Fecha de Entrega', 'Costo'];
+
+  return (
+    <div className='mt-4 w-full rounded-3xl bg-gray-100 pt-4'>
+      <Text variant='title' className='mb-4 text-center text-slate-800 dark:text-white'>
+        Ultimas Ordenes
+      </Text>
+      <Table>
+        {/* <TableCaption>Lista de Usuarios</TableCaption> */}
+        <TableHeader>
+          <TableRow>
+            {tableHead.map((head) => (
+              <TableHead key={head} className='text-center'>
+                {head}
+              </TableHead>
+            ))}
+            <TableHead className='text-center'>Acciones</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {orders.map(({ id, vehicle, orderServices, departureDate, cost }) => {
+            const date = new Date(departureDate);
+            const formatedDate = new Intl.DateTimeFormat('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }).format(date);
+            return (
+              <TableRow key={id}>
+                <TableCell>{id}</TableCell>
+                <TableCell>{`${vehicle.customer.firstName} ${vehicle.customer.lastName}`}</TableCell>
+                <TableCell>{`${vehicle.plate.toUpperCase()}`}</TableCell>
+                <TableCell>{orderServices[0].service.service}</TableCell>
+                <TableCell>{formatedDate}</TableCell>
+                <TableCell>
+                  {cost.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    currencyDisplay: 'symbol',
+                  })}
+                </TableCell>
+                <TableCell className='flex items-center justify-center'>
+                  <ActionsButtons id={id} category='orders' />
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
+
+export default NewstOrdersTable;

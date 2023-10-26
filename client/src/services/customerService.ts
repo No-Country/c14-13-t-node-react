@@ -1,10 +1,5 @@
-import axios from 'axios';
 import type { NewCustomer, Customer } from '@/types/common';
-import { getBaseUrl } from '@/utils/getUrl';
-
-const BASE_URL = `${getBaseUrl()}/api/`; //En producción debería cambiar
-
-const axiosClient = axios.create({ baseURL: BASE_URL });
+import { axiosClient } from './AxiosClient';
 
 //Users Crud
 

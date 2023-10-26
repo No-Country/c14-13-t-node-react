@@ -14,7 +14,7 @@ export const Sidebar = () => {
   const { data: session } = useSession();
   const isAdmin = session?.user.role === 'admin';
   return (
-    <nav className='flex h-auto w-1/4 flex-col items-start justify-start pl-2 pr-3 pt-4 text-black shadow-right'>
+    <nav className='hidden h-auto w-1/4 flex-col items-start justify-start bg-white pl-2 pr-3 pt-4 text-black shadow-right dark:bg-primary-lightBackground md:visible md:flex'>
       <Accordion type='single' collapsible className='w-full'>
         {sidebarData
           .filter(({ adminOnly }) => !adminOnly || isAdmin)
