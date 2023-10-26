@@ -16,8 +16,8 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const NewEmployee = NewEmployeeSchema.parse(body);
-    const customer = await createEmployee(NewEmployee);
-    return NextResponse.json({ customer }, { status: 200 });
+    const employee = await createEmployee(NewEmployee);
+    return NextResponse.json({ employee }, { status: 200 });
   } catch (error) {
     return handleCommonError(error);
   }

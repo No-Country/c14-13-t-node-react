@@ -10,6 +10,8 @@ import { MechanicCreationSchema } from '@/schemas/MechanicSchema';
 import { WorkshopServiceCreationSchema } from '@/schemas/WorkshopServicesSchema';
 import { WorkshopCreationSchema } from '@/schemas/WorkshopSchema';
 import { EmployeeCreationSchema } from '@/schemas/EmployeeSchema';
+import { OrderCreationSchema } from '@/schemas/OrderSchema';
+
 
 export type ExtractProperties<T> = {
   [K in keyof T]: T[K];
@@ -35,3 +37,6 @@ export type Workshops = NewWorkshop;
 
 export type NewEmployee = z.infer<typeof EmployeeCreationSchema>;
 export type Employees = NewEmployee;
+
+export type NewOrder = z.infer<typeof EmployeeCreationSchema>;
+export type Orders = NewOrder;
