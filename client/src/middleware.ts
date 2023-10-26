@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getBaseUrl } from '@/utils/getUrl';
 
-const protectedApiRoutes = ['/api/costumers', '/api/vehicles'];
+const protectedApiRoutes = ['/api/customers', '/api/vehicles'];
 const onlyAdminApiRoutes = ['/api/data'];
 const onlyAdminRoutes = ['/dashboard/users-list'];
 const baseUrl = getBaseUrl();
