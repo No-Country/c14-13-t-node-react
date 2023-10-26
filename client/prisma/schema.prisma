@@ -77,7 +77,7 @@ model Customer {
 
 model Vehicle {
   id          Int      @id @default(autoincrement())
-  plate       String
+  plate       String   @unique
   brand       String
   model       String
   comments    String?
@@ -86,6 +86,7 @@ model Vehicle {
   year        String
   color       String
   doors       String
+  isActive    Boolean  @default(true) @map("is_active")
   customerId  Int      @map("customer_id")
   customer    Customer @relation(fields: [customerId], references: [id])
   orders      Order[]
