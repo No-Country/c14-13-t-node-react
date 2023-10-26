@@ -117,7 +117,7 @@ export const StatisticsBoard = () => {
           <StatisticsCard key={item.description} {...item} />
         ))}
         <div className='relative col-span-2 row-span-2 flex h-[19rem] w-full items-center justify-center rounded-3xl bg-white p-3 pl-2 pt-8 dark:bg-primary-lightBackground dark:text-white'>
-          <span className='absolute left-[15%] top-[15%] text-2xl font-semibold text-gray-700 dark:text-gray-200'>
+          <span className='absolute left-[15%] top-[11%] text-2xl font-semibold text-gray-700 dark:text-gray-200'>
             Servicios mas Populares
           </span>
           {ChartComponent}
