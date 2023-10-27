@@ -1,5 +1,5 @@
 import type { UseFormRegister, FieldValues, Path, FieldErrors } from 'react-hook-form';
-import { Input, TextArea } from '@/components/ui';
+import { Input, TextArea, Label } from '@/components/ui';
 
 export type FieldList<T extends FieldValues> = Omit<
   FormFieldProps<T>,
@@ -31,12 +31,7 @@ export const FormField = <T extends FieldValues>({
   const FieldComponent = fieldType === 'textarea' ? TextArea : Input;
   return (
     <div className='my-2'>
-      <label
-        className='text-sm font-medium text-slate-900 dark:text-slate-200'
-        htmlFor={String(id)}
-      >
-        {label}:
-      </label>
+      <Label id={String(id)} label={label} />
       <FieldComponent
         type={type}
         placeholder={placeholder ?? label}

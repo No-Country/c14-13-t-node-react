@@ -3,6 +3,7 @@ export * from './Button/Button';
 export * from './Button/styles';
 export * from './Dropdown/Dropdown';
 export * from './Input/Input';
+export * from './Label/Label';
 export * from './Modal/Modal';
 export * from './Select/Select';
 export * from './Skeleton/Skeleton';
