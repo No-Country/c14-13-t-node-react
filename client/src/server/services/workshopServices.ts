@@ -9,14 +9,10 @@ export const createWorkshopService = async (workshopServiceData: NewWorkshopServ
   return await prisma.service.create({ data: workshopServiceData });
 };
 
-export const getWorkshopServiceById = async (params:type) => {
+export const getWorkshopServiceById = async (params: unknown) => {
   return await prisma.service.findFirst();
-}
+};
 
-export const updateWorkshopService = async (params:type) => {
-  
-}
+export const updateWorkshopService = async (params: unknown) => {};
 
-export const removeWorkshopService = async (params:type) => {
-  
-}
+export const removeWorkshopService = async (params: unknown) => {};

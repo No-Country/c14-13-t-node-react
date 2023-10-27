@@ -96,7 +96,7 @@ export const AddCustomerForm = () => {
     },
   ];
   return (
-    <div className='w-[90%] max-w-[23.75rem] pt-10'>
+    <div className='mt-10 w-[90%] max-w-[23.75rem] rounded-3xl bg-white p-7'>
       <Text variant='title' className='text-center'>
         Añadir Cliente
       </Text>

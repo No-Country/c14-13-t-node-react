@@ -14,6 +14,10 @@ export const buttonVariants = cva('disabled:pointer-events-none', {
         'flex w-full transform items-center justify-center gap-3 rounded-xl border border-gray-300  py-2 text-base font-semibold  text-gray-700 transition-all ease-in-out hover:bg-gray-200 active:bg-gray-100 active:duration-75 dark:text-gray-300 dark:hover:text-gray-700',
       navbar:
         'flex items-center justify-center rounded-full border-[#5f63f2] bg-[#5f63f2] p-2 text-base font-medium text-white hover:border-[#8c94ff] hover:bg-[#8c94ff]',
+      cancel:
+        'flex min-w-[7rem] items-center justify-center rounded-lg border border-[#5f63f2] bg-gray-200 p-2 text-base font-medium text-gray-800 duration-300 hover:border-gray-400 hover:bg-gray-100 hover:text-gray-950 dark:bg-gray-200 dark:hover:bg-gray-300/70',
+      delete:
+        'flex min-w-[7rem] items-center justify-center rounded-lg border-[#5f63f2] bg-red-400 p-2 text-base font-medium text-white duration-300 hover:border-[#8c94ff] hover:bg-red-400/90 hover:text-white',
     },
   },
   defaultVariants: {

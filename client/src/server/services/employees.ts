@@ -9,14 +9,10 @@ export const createEmployee = async (employeeData: NewEmployee) => {
   return await prisma.employee.create({ data: employeeData });
 };
 
-export const getEmployeeById = async (params:type) => {
+export const getEmployeeById = async (params: unknown) => {
   return await prisma.employee.findFirst();
-}
+};
 
-export const updateEmployee = async (params:type) => {
-  
-}
+export const updateEmployee = async (params: unknown) => {};
 
-export const removeEmployee = async (params:type) => {
-  
-}
+export const removeEmployee = async (params: unknown) => {};

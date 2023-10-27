@@ -17,7 +17,9 @@ export const PaginationButtons = ({
         <button
           key={page}
           className={`rounded px-4 py-2 ${
-            page === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            page === currentPage
+              ? 'bg-blue-500 text-white'
+              : 'border border-gray-300 bg-gray-200 text-black'
           }`}
           onClick={() => handleClick(page)}
         >

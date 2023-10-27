@@ -1,16 +1,21 @@
 import { forwardRef } from 'react';
+import { cn } from '@/utils/cn';
 
-export const TableContainer = forwardRef<HTMLDivElement, { children: React.ReactNode }>(
-  ({ children }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className='w-full rounded-3xl bg-gray-100 pt-4 dark:bg-primary-lightBackground'
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const TableContainer = forwardRef<
+  HTMLDivElement,
+  { children: React.ReactNode; className?: string }
+>(({ children, className }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'w-full rounded-3xl bg-white pt-4 dark:bg-primary-lightBackground',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+});
 
 TableContainer.displayName = 'TableContainer';

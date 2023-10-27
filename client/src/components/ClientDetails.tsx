@@ -6,18 +6,6 @@ import { Customer } from '../types/common';
 import DetailsCard from './DetailsCard';
 import { cn } from '../utils/cn';
 
-type pito = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  dni: string;
-  phone: string;
-  address: string;
-  city: string;
-} & {
-  id: number;
-  isActive: boolean;
-};
 const ClientDetails = ({ id }: { id: number }) => {
   const [pestaña, setPestaña] = useState<'resumen' | 'vehiculos' | 'ordenes'>('resumen');
   const {

@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const WorkshopSchema = z.object({
   //ME ESTA TRAYENDO UN UUID
-nit: z
+  nit: z
     .string()
     .min(6, 'El NIT debe tener al menos 6 caracteres')
     .max(25, 'El NIT no puede tener más de 25 caracteres')
@@ -11,7 +11,7 @@ nit: z
       'El NIT solo puede contener letras, números, guiones y guiones bajos',
     )
     .trim(),
-name: z
+  name: z
     .string()
     .min(2, 'El nombre debe tener al menos 2 caracteres')
     .max(50, 'El nombre no puede tener más de 50 caracteres')
@@ -20,15 +20,15 @@ name: z
       'El nombre solo puede contener letras, números, guiones y guiones bajos',
     )
     .trim(),
-address: z
+  address: z
     .string()
     .min(4, 'La dirección debe tener al menos 4 caracteres')
     .max(75, 'La dirección no puede tener más de 75 caracteres'),
-email: z
+  email: z
     .string()
     .email('Introduzca una dirección de correo electrónico válida')
     .max(40, 'El correo electrónico no puede tener más de 40 caracteres'),
-phone: z
+  phone: z
     .string()
     .min(6, 'El teléfono debe tener al menos 6 caracteres')
     .max(25, 'El teléfono no puede tener más de 25 caracteres')

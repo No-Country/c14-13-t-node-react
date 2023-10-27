@@ -50,7 +50,13 @@ export const UsersTable = ({ children }: { children: React.ReactNode }) => {
                 {role === 'user' || role === 'guest' ? 'Usuario' : 'Administrador'}
               </TableCell>
               <TableCell className='flex items-center justify-center'>
-                <ActionsButtons id={id} category='users' />
+                <ActionsButtons
+                  deleteDescription={`Esta seguro que desea borrar al Usuario ${
+                    name ?? username
+                  }`}
+                  id={id}
+                  category='users'
+                />
               </TableCell>
             </TableRow>
           ))}

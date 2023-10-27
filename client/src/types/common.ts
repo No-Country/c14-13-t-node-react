@@ -94,3 +94,16 @@ export type Workshops = NewWorkshop;
 
 export type NewEmployee = z.infer<typeof EmployeeCreationSchema>;
 export type Employees = NewEmployee;
+
+export type ActionBase = {
+  id: string | number;
+  category:
+    | 'customers'
+    | 'vehicles'
+    | 'users'
+    | 'employees'
+    | 'orders'
+    | 'mechanics'
+    | 'services';
+  deleteDescription: string;
+};

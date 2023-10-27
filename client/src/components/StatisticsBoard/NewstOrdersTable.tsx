@@ -11,6 +11,7 @@ import {
 } from '@/components/ui';
 import { ActionsButtons } from '../ActionsButtons';
 import { FullOrder } from '@/types/common';
+import { TableContainer } from '../TableContainer';
 
 interface NewstOrdersTableProps {
   orders: FullOrder[];
@@ -20,7 +21,7 @@ const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
   const tableHead = ['Orden', 'Cliente', 'Vehículo', 'Servicio', 'Fecha de Entrega', 'Costo'];
 
   return (
-    <div className='mt-4 w-full rounded-3xl bg-gray-100 pt-4'>
+    <TableContainer className='mt-4'>
       <Text variant='title' className='mb-4 text-center text-slate-800 dark:text-white'>
         Ultimas Ordenes
       </Text>
@@ -59,14 +60,18 @@ const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
                   })}
                 </TableCell>
                 <TableCell className='flex items-center justify-center'>
-                  <ActionsButtons id={id} category='orders' />
+                  <ActionsButtons
+                    id={id}
+                    category='orders'
+                    deleteDescription={`Esta seguro que desea borrar la orden ${id}`}
+                  />
                 </TableCell>
               </TableRow>
             );
           })}
         </TableBody>
       </Table>
-    </div>
+    </TableContainer>
   );
 };
 

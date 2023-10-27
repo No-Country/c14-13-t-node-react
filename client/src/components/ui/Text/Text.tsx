@@ -29,6 +29,10 @@ const createText = (variant: TextProps['variant']) => {
       return 'p';
     case 'statisticsDescription':
       return 'p';
+    case 'modalTitle':
+      return 'h1';
+    case 'modalDescription':
+      return 'p';
     default:
       throw new Error('Text Variant not supported');
   }

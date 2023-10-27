@@ -71,7 +71,11 @@ export const CustomersTable = ({ children }: { children: React.ReactNode }) => {
                   <StatusChip isActive={isActive} />
                 </TableCell>
                 <TableCell className='flex items-center justify-center'>
-                  <ActionsButtons id={id} category='customers' />
+                  <ActionsButtons
+                    id={id}
+                    category='customers'
+                    deleteDescription={`Esta seguro que desea borrar al cliente ${firstName} ${lastName}`}
+                  />
                 </TableCell>
               </TableRow>
             ),
