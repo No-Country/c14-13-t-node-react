@@ -13,6 +13,7 @@ export const WorkshopServiceSchema = z.object({
   service: z.string().min(4, 'El Servicio debe tener al menos 2 caracteres').trim(),
   description: z.string(),
   servicePrice: z.number().multipleOf(0.01),
+  isActive: z.boolean(),
 });
 
 export const WorkshopServiceCreationSchema = WorkshopServiceSchema;

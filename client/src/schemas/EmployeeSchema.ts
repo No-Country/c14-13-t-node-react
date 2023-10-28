@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const EmployeeSchema = z.object({
+  id: z.number().int().positive(),
   dni: z
     .string()
     .min(6, 'El DNI debe tener al menos 6 caracteres')
@@ -36,6 +37,7 @@ export const EmployeeSchema = z.object({
       'El numero de teléfono solo puede tener números, guiones y guiones bajos',
     )
     .trim(),
+  isActive: z.boolean(),
 });
 
-export const EmployeeCreationSchema = EmployeeSchema;
+export const NewEmployeeCreationSchema = EmployeeSchema.omit({ id: true });

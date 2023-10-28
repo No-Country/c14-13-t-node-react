@@ -24,7 +24,8 @@ export const VehicleSchema = z.object({
   year: z.string(),
   color: z.string(),
   doors: z.enum(['2 Puertas', '4 Puertas']),
-  customerId: z.number().min(1, 'El campo debe tener al menos 1 caracter'),
+  customerId: z.number().min(1, 'El campo debe tener al menos 1 caracterer'),
+  isActive: z.boolean(),
 });
 
 export const VehicleCreationSchema = VehicleSchema;

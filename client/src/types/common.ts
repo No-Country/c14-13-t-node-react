@@ -9,7 +9,9 @@ import { VehicleCreationSchema } from '@/schemas/VehicleSchema';
 import { MechanicCreationSchema } from '@/schemas/MechanicSchema';
 import { WorkshopServiceCreationSchema } from '@/schemas/WorkshopServicesSchema';
 import { WorkshopCreationSchema } from '@/schemas/WorkshopSchema';
-import { EmployeeCreationSchema } from '@/schemas/EmployeeSchema';
+import { NewEmployeeCreationSchema } from '@/schemas/EmployeeSchema';
+import { OrderCreationSchema } from '@/schemas/OrderSchema';
+
 
 export type ExtractProperties<T> = {
   [K in keyof T]: T[K];
@@ -92,7 +94,7 @@ export type WorkshopServices = NewWorkshopService;
 export type NewWorkshop = z.infer<typeof WorkshopCreationSchema>;
 export type Workshops = NewWorkshop;
 
-export type NewEmployee = z.infer<typeof EmployeeCreationSchema>;
+export type NewEmployee = z.infer<typeof NewEmployeeCreationSchema>;
 export type Employees = NewEmployee;
 
 export type ActionBase = {
@@ -107,3 +109,6 @@ export type ActionBase = {
     | 'services';
   deleteDescription: string;
 };
+
+export type NewOrder = z.infer<typeof OrderCreationSchema>;
+export type Orders = NewOrder;
