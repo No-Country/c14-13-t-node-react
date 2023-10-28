@@ -5,7 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInSchema } from '@/schemas/AuthSchema';
 import { z } from 'zod';
 import { Text, Button, Spinner } from '@/components/ui';
-import { FormField, type FieldList } from '@/components';
+import { FormField } from '@/components';
+import { TextFieldItem } from '@/types/formTypes';
 import { toast } from 'sonner';
 import Link from 'next/link';
 import OautButtons from '../oauth-buttons/OautButtons';
@@ -42,7 +43,7 @@ export const SignInForm = () => {
     router.refresh();
     router.push('/dashboard');
   };
-  const signInFields: FieldList<SignInSchemaType> = [
+  const signInFields: TextFieldItem<SignInSchemaType>[] = [
     {
       label: 'Correo Electrónico',
       id: 'email',

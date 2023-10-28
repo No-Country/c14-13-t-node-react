@@ -78,7 +78,7 @@ function PortalImpl({
   return (
     <div
       className={cn(
-        'fixed inset-0 z-50 flex shrink grow-0 flex-col items-center justify-center bg-gray-500/70',
+        'fixed inset-0 z-50 flex shrink grow-0 flex-col items-center justify-center bg-gray-500/90',
         color === 'dark' && 'dark bg-[#0a0a14f5]',
       )}
       role='dialog'

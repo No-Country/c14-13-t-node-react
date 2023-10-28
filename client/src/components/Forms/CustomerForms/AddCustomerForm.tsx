@@ -3,18 +3,14 @@ import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CustomerCreationSchema } from '@/schemas/CustomerSchema';
-import { z } from 'zod';
 import { Text, Button, Spinner } from '@/components/ui';
-import { FormField, type FieldList } from '@/components';
+import { FormField } from '@/components';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { registerCustomer } from '@/services/customerService';
-import { useQuery } from '@tanstack/react-query';
-import { getCustomers } from '@/services/customerService';
-import { Customer } from '@/types/common';
-
-type CustomerFormSchemaType = z.infer<typeof CustomerCreationSchema>;
+import { CustomerFormSchemaType } from './types';
+import { createCustomerFields } from './data';
 
 export const AddCustomerForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +38,7 @@ export const AddCustomerForm = () => {
   } = useForm<CustomerFormSchemaType>({ resolver: zodResolver(CustomerCreationSchema) });
   const handleInputChange = async (field: keyof CustomerFormSchemaType) => {
     //con el "keyof" obtenemos auto completado cuando llamemos la función
-    await trigger(field);
+    await trigger(field); //dispara la validación del campo
   };
 
   const onSubmit: SubmitHandler<CustomerFormSchemaType> = (data) => {
@@ -65,36 +61,6 @@ export const AddCustomerForm = () => {
     });
   };
 
-  const createCustomerFields: FieldList<CustomerFormSchemaType> = [
-    {
-      id: 'firstName',
-      label: 'Nombre',
-    },
-    { id: 'lastName', label: 'Apellido' },
-    {
-      id: 'dni',
-      label: 'DNI',
-    },
-    {
-      id: 'email',
-      label: 'Correo Electrónico',
-      placeholder: 'correo@ejemplo.com',
-    },
-    {
-      id: 'city',
-      label: 'Ciudad',
-    },
-    {
-      id: 'phone',
-      label: 'Teléfono',
-      placeholder: '51 999 999 999',
-    },
-    {
-      id: 'address',
-      label: 'Dirección',
-      fieldType: 'textarea',
-    },
-  ];
   return (
     <div className='mt-10 w-[90%] max-w-[23.75rem] rounded-3xl bg-white p-7'>
       <Text variant='title' className='text-center'>

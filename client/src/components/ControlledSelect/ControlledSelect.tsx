@@ -1,42 +1,56 @@
-'use client';
-import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 import {
   Select,
   SelectItem,
   SelectContent,
   SelectTrigger,
   SelectValue,
+  Label,
 } from '@/components/ui'; // Import the Select components from Shadcn
-
-interface ControlledSelectProps<T extends FieldValues = FieldValues> {
-  control: Control<T>;
-  name: Path<T>;
-  options: string[];
-}
+import { ControlledSelectProps } from '@/types/formTypes';
 
 export function ControlledSelect<T extends FieldValues>({
   control,
-  name,
+  id,
   options,
+  label,
+  errors,
+  placeholder = 'Seleccione una opción',
   ...props
 }: ControlledSelectProps<T>) {
+  const isError = !!errors?.[id];
+  const errorMessage = String(errors?.[id]?.message);
   return (
     <Controller
       control={control}
-      name={name}
+      name={id}
       render={({ field }) => (
-        <Select onValueChange={field.onChange} value={field.value} {...props}>
-          <SelectTrigger>
-            <SelectValue placeholder='Seleccione numero de puertas' />
-          </SelectTrigger>
-          <SelectContent>
-            {options.map((option, i) => (
-              <SelectItem key={i} value={option}>
-                {option}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className='my-2'>
+          <Label id={String(id)} label={label} />
+          <Select
+            onValueChange={field.onChange}
+            value={field.value}
+            {...props}
+            aria-invalid={isError}
+            aria-describedby={isError ? `${String(id)}-error` : undefined}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((option, i) => (
+                <SelectItem key={i} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {isError && (
+            <span id={`${String(id)}-error`} className='font-bold text-red-600'>
+              {errorMessage}
+            </span>
+          )}
+        </div>
       )}
     />
   );
