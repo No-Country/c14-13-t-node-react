@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/server/db';
 import type { NewEmployee } from '@/types/common';
 

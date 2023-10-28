@@ -36,6 +36,8 @@ phone: z
       'El numero de teléfono solo puede tener números, guiones y guiones bajos',
     )
     .trim(),
+    isActive: z
+.boolean()
 });
 
 export const MechanicCreationSchema = MechanicSchema;

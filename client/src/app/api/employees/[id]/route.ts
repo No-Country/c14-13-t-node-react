@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { handleCommonError } from '@/server/errorHandlers';
 import { getEmployeeById, updateEmployee, removeEmployee } from '@/server/services/employees';
-import { EmployeeSchema, NewEmployeeCreationSchema } from '@/schemas/EmployeeSchema';
+import { NewEmployeeCreationSchema } from '@/schemas/EmployeeSchema';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
@@ -27,20 +27,19 @@ export async function PATCH(request: Request, { params }: { params: { id: string
     const body = await request.json();
     const newData = NewEmployeeCreationSchema.parse(body);
     const employee = await updateEmployee(parseInt(params.id), newData);
-    // if (!updateEmployee) {
-    //   return NextResponse.json(
-    //     {
-    //       message: 'Not Employee Update',
-    //     },
-    //     {
-    //       status: 404,
-    //     },
-    //   );
-    // }
+    if (!employee) {
+      return NextResponse.json(
+        {
+          message: 'Not Employee Update',
+        },
+        {
+          status: 404,
+        },
+      );
+    }
     return NextResponse.json({ employee }, { status: 200 });
   } catch (error) {
-    // return handleCommonError(error);
-    console.error(error);
+    return handleCommonError(error);
   }
 }
 

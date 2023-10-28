@@ -19,6 +19,8 @@ description: z
 servicePrice: z
 .number()
 .multipleOf(0.01),
+isActive: z
+.boolean()
 });
 
 export const WorkshopServiceCreationSchema = WorkshopServiceSchema;

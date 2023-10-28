@@ -35,6 +35,8 @@ doors: z
 customerId: z
     .number()
     .min(1, 'El campo debe tener al menos 1 caracterer'),
+    isActive: z
+.boolean()
 });
 
 export const VehicleCreationSchema = VehicleSchema;
