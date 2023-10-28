@@ -2,6 +2,7 @@ export * from './Accordion/Accordion';
 export * from './Button/Button';
 export * from './Button/styles';
 export * from './Dropdown/Dropdown';
+export * from './FormContainer/FormContainer';
 export * from './Input/Input';
 export * from './Label/Label';
 export * from './Modal/Modal';

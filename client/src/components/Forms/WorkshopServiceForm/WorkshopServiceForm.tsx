@@ -2,26 +2,21 @@
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { Text, Button, Spinner, FormContainer } from '@/components/ui';
 import { FormField } from '@/components';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
-import { ControlledSelect } from '../../ControlledSelect/ControlledSelect';
-import { createVehicleFields } from './data';
-import {
-  VehicleWithOutId,
-  VehicleCreationSchema,
-  type VehicleCreationSchemaType,
-} from './types';
+import { createWorkshopServiceFields } from './data';
+import { WorkshopServiceCreationSchemaType } from './types';
+import { WorkshopServiceCreationSchema } from '@/schemas/WorkshopServicesSchema';
 
-export const VehicleForm = () => {
+export const WorkshopServiceForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   //   const mutation = useMutation({
-  //     mutationFn: (data: VehicleCreationSchemaType) => {
+  //     mutationFn: (data: WorkshopServiceCreationSchemaType) => {
   //       return registerCustomer(data);
   //     },
   //     onSuccess: () => {
@@ -41,13 +36,15 @@ export const VehicleForm = () => {
     trigger,
     control,
     reset,
-  } = useForm<VehicleCreationSchemaType>({ resolver: zodResolver(VehicleWithOutId) });
+  } = useForm<WorkshopServiceCreationSchemaType>({
+    resolver: zodResolver(WorkshopServiceCreationSchema),
+  });
   //
-  const handleInputChange = async (field: keyof VehicleCreationSchemaType) => {
+  const handleInputChange = async (field: keyof WorkshopServiceCreationSchemaType) => {
     await trigger(field);
   };
 
-  const onSubmit: SubmitHandler<VehicleCreationSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<WorkshopServiceCreationSchemaType> = (data) => {
     setIsLoading(true);
     // mutation.mutate(data, {
     //   onSuccess: () => {
@@ -73,33 +70,19 @@ export const VehicleForm = () => {
   return (
     <FormContainer>
       <Text variant='title' className='text-center'>
-        Añadir Vehículo
+        Añadir Servicio
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {createVehicleFields.map((field) => {
-          if (field.fieldType === 'select') {
-            return (
-              <ControlledSelect
-                key={field.id}
-                label={field.label}
-                control={control}
-                id={field.id}
-                errors={errors}
-                options={field.options}
-                placeholder={field.placeholder}
-              />
-            );
-          } else {
-            return (
-              <FormField
-                key={field.id}
-                {...field}
-                register={register}
-                handleInputChange={handleInputChange}
-                errors={errors}
-              />
-            );
-          }
+        {createWorkshopServiceFields.map((field) => {
+          return (
+            <FormField
+              key={field.id}
+              {...field}
+              register={register}
+              handleInputChange={handleInputChange}
+              errors={errors}
+            />
+          );
         })}
         <Button type='submit' variant='formSubmit' disabled={isLoading}>
           {isLoading ? <Spinner /> : 'Añadir'}

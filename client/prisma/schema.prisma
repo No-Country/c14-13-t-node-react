@@ -82,7 +82,7 @@ model Vehicle {
   model       String
   comments    String?
   vehicleType String   @map("vehicle_type")
-  mileage     String?
+  mileage     String
   year        String
   color       String
   doors       String

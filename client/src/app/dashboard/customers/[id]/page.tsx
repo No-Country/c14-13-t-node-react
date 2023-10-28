@@ -1,4 +1,4 @@
-import ClientDetails from '@/components/ClientDetails';
+import { ClientDetails } from '@/components/CustomerDetails/CustomerDetails';
 
 export default function page({ params }: { params: { id: string } }) {
   return (

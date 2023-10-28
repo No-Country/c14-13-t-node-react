@@ -15,16 +15,25 @@ export const VehicleBaseSchema = z.object({
     .string()
     .min(1, 'El modelo debe tener al menos 1 caracter')
     .max(30, 'El modelo no puede tener más de 30 caracteres'),
-  comments: z.string(),
+  comments: z.string().optional(),
   vehicleType: z
     .string()
     .min(4, 'El campo debe tener al menos 4 caracteres')
     .max(20, 'El campo no puede tener más de 20 caracteres'),
-  mileage: z.string(),
-  year: z.string(),
-  color: z.string(),
+  mileage: z.string().regex(/^[0-9]+$/, 'El kilometraje solo puede contener números'),
+  year: z
+    .string()
+    .regex(/^[0-9]+$/, 'El año solo puede contener números')
+    .regex(/^[0-9]{4}$/, 'El año debe tener 4 dígitos')
+    .refine((val) => parseInt(val) >= 1900, {
+      message: 'El año debe ser mayor o igual a 1900',
+    })
+    .refine((val) => parseInt(val) < new Date().getFullYear() + 2, {
+      message: 'El año debe ser menor a 2024',
+    }),
+  color: z.string().min(1, 'El campo debe tener al menos 1 caracter'),
   doors: z.enum(['2 Puertas', '4 Puertas']),
-  customerId: z.number().min(1, 'El campo debe tener al menos 1 caracterer'),
+  customerId: z.number().min(1, 'El campo debe tener al menos 1 caracter'),
   isActive: z.boolean(),
 });
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CustomerCreationSchema } from '@/schemas/CustomerSchema';
-import { Text, Button, Spinner } from '@/components/ui';
+import { Text, Button, Spinner, FormContainer } from '@/components/ui';
 import { FormField } from '@/components';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
@@ -62,7 +62,7 @@ export const AddCustomerForm = () => {
   };
 
   return (
-    <div className='mt-10 w-[90%] max-w-[23.75rem] rounded-3xl bg-white p-7'>
+    <FormContainer>
       <Text variant='title' className='text-center'>
         Añadir Cliente
       </Text>
@@ -80,6 +80,6 @@ export const AddCustomerForm = () => {
           {isLoading ? <Spinner /> : 'Añadir Cliente'}
         </Button>
       </form>
-    </div>
+    </FormContainer>
   );
 };

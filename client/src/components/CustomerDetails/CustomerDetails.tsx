@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getCustomerById } from '@/services/customerService';
-import { Customer } from '../types/common';
-import DetailsCard from './DetailsCard';
-import { cn } from '../utils/cn';
+import { Customer } from '@/types/common';
+import DetailsCard from '../DetailsCard';
+import { cn } from '@/utils/cn';
+import { VehicleForm } from '../Forms';
+import { Spinner } from '../ui';
 
-const ClientDetails = ({ id }: { id: number }) => {
+export const ClientDetails = ({ id }: { id: number }) => {
   const [pestaña, setPestaña] = useState<'resumen' | 'vehiculos' | 'ordenes'>('resumen');
   const {
     data: customer,
@@ -19,7 +21,12 @@ const ClientDetails = ({ id }: { id: number }) => {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
-  if (isLoading) return <div className='text-slate-800 dark:text-slate-200'>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className='flex min-h-screen w-full items-center justify-center text-slate-800 dark:text-slate-200'>
+        <Spinner className='h-10 w-10' />
+      </div>
+    );
   if (isError)
     return <div className='text-slate-800 dark:text-slate-200'>Error: {String(error)}</div>;
   const infoRows = [
@@ -69,9 +76,9 @@ const ClientDetails = ({ id }: { id: number }) => {
           <div className='animate-fadeIn bg-green-300 text-slate-800'>Lista de Vehículos</div>
         )}
         {pestaña === 'vehiculos' && (
-          <div className='animate-fadeIn bg-green-300 text-slate-800'>
-            Formulario vehiculos
-          </div>
+          <span className='animate-fadeIn'>
+            <VehicleForm />
+          </span>
         )}
         {pestaña === 'ordenes' && (
           <div className='animate-fadeIn bg-green-300 text-slate-800'>Formulario ordenes</div>
@@ -80,5 +87,3 @@ const ClientDetails = ({ id }: { id: number }) => {
     </div>
   );
 };
-
-export default ClientDetails;

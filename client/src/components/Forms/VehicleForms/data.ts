@@ -22,6 +22,7 @@ export const createVehicleFields: FormItems<VehicleCreationSchemaType> = [
     label: 'Numero de Puertas',
     fieldType: 'select',
     options: doorOptions,
+    placeholder: 'Seleccione una opción',
   },
   {
     id: 'vehicleType',

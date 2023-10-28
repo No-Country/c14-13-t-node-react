@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { deleteCustomer, getCustomerById, updateCustomer } from '@/server/services/costumers';
+import { deleteCustomer, getCustomerById, updateCustomer } from '@/server/services/customers';
 import { handleCommonError } from '@/server/errorHandlers';
 import { CustomerSchema } from '@/schemas/CustomerSchema';
 
