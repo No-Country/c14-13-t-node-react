@@ -12,7 +12,6 @@ import { WorkshopCreationSchema } from '@/schemas/WorkshopSchema';
 import { NewEmployeeCreationSchema } from '@/schemas/EmployeeSchema';
 import { OrderCreationSchema } from '@/schemas/OrderSchema';
 
-
 export type ExtractProperties<T> = {
   [K in keyof T]: T[K];
 };

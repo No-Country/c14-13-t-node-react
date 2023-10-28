@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-export const OrderSchema = z.object({
-  entryDate: z //manejar por date o datetime????
+export const OrderBaseSchema = z.object({
+  entryDate: z //manejar por date o datetime???? ->datetime!
     .string()
     .datetime(),
   departureDate: z.string().datetime(),
@@ -11,6 +11,10 @@ export const OrderSchema = z.object({
   mechanicId: z.number(),
   vehicleId: z.number(),
   employeeId: z.number(),
+  status: z.enum(['Pendiente', 'En proceso', 'Finalizado']),
 });
 
-export const OrderCreationSchema = OrderSchema;
+export const OrderCreationSchema = OrderBaseSchema;
+export const OrderSchema = OrderBaseSchema.extend({
+  id: z.number().int().positive(),
+});

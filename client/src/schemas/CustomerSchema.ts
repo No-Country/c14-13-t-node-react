@@ -23,7 +23,7 @@ export const CustomerBaseSchema = PersonSchema.extend({
   address: z
     .string()
     .min(4, 'La dirección debe tener al menos 4 caracteres')
-    .max(75, 'La dirección no puede tener más de 75 caracteres'),
+    .max(95, 'La dirección no puede tener más de 75 caracteres'),
   city: z
     .string()
     .min(4, 'La ciudad debe tener al menos 4 caracteres')

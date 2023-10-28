@@ -63,16 +63,16 @@ model VerificationToken {
 }
 
 model Customer {
-  id       Int       @id @default(autoincrement())
-  dni      String    @unique
+  id        Int       @id @default(autoincrement())
+  dni       String    @unique
   firstName String    @map("first_name")
-  lastName String    @map("last_name")
-  email    String    @unique
-  phone    String
-  address  String
-  city     String
-  isActive Boolean   @default(true) @map("is_active")
-  vehicles Vehicle[]
+  lastName  String    @map("last_name")
+  email     String    @unique
+  phone     String
+  address   String
+  city      String
+  isActive  Boolean   @default(true) @map("is_active")
+  vehicles  Vehicle[]
 }
 
 model Vehicle {
@@ -116,6 +116,7 @@ model Order {
   mechanic      Mechanic       @relation(fields: [mechanicId], references: [id])
   vehicle       Vehicle        @relation(fields: [vehicleId], references: [id])
   employees     Employee       @relation(fields: [employeeId], references: [id])
+  status        Status         @default(pending)
   orderServices OrderService[]
 }
 
@@ -163,4 +164,10 @@ enum RoleType {
   guest
   user
   admin
+}
+
+enum Status {
+  pending
+  inProgress
+  finished
 }

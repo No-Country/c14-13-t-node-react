@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const VehicleSchema = z.object({
+export const VehicleBaseSchema = z.object({
   plate: z
     .string()
     .min(6, 'La Placa debe tener al menos 6 caracteres')
@@ -28,4 +28,7 @@ export const VehicleSchema = z.object({
   isActive: z.boolean(),
 });
 
-export const VehicleCreationSchema = VehicleSchema;
+export const VehicleCreationSchema = VehicleBaseSchema;
+export const VehicleSchema = VehicleBaseSchema.extend({
+  id: z.number().int().positive(),
+});
