@@ -1,13 +1,10 @@
 import React from 'react';
-import { CustomersTable } from '@/components/CustomersTable';
-import { TableSkeleton } from '@/components/TableSkeleton';
+import { EmployeeForm } from '@/components/Forms';
 
 export default function page() {
   return (
     <>
-      <CustomersTable>
-        <TableSkeleton />
-      </CustomersTable>
+      <EmployeeForm />
     </>
   );
 }
