@@ -11,29 +11,27 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 import { ControlledSelect } from '../../ControlledSelect/ControlledSelect';
 import { createVehicleFields } from './data';
-import {
-  VehicleWithOutId,
-  VehicleCreationSchema,
-  type VehicleCreationSchemaType,
-} from './types';
+import { type VehicleCreationSchemaType } from '@/types/common';
+import { createVehicle } from '@/services/vehicleService';
+import { VehicleWithOutCustomerId } from '@/schemas/VehicleSchema';
 
-export const VehicleForm = () => {
+export const VehicleForm = ({ customerId }: { customerId: number }) => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
-  //   const mutation = useMutation({
-  //     mutationFn: (data: VehicleCreationSchemaType) => {
-  //       return registerCustomer(data);
-  //     },
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries(['customers'], { refetchType: 'all' });
-  //       //Otra manera de actualizar el cache es tomar la respuesta de la mutation y añadirlo al cache:
-  //       // queryClient.setQueriesData(['customers'], (oldData) => {
-  //       //   return {
-  //       //     customers: [...(oldData as { customers: Customer[] })?.customers, data.customer],
-  //       //   };
-  //       // });
-  //     },
-  //   });
+  const mutation = useMutation({
+    mutationFn: (data: VehicleCreationSchemaType) => {
+      return createVehicle({ ...data, customerId });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['vehicles'], { refetchType: 'all' });
+      //Otra manera de actualizar el cache es tomar la respuesta de la mutation y añadirlo al cache:
+      // queryClient.setQueriesData(['customers'], (oldData) => {
+      //   return {
+      //     customers: [...(oldData as { customers: Customer[] })?.customers, data.customer],
+      //   };
+      // });
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -41,7 +39,7 @@ export const VehicleForm = () => {
     trigger,
     control,
     reset,
-  } = useForm<VehicleCreationSchemaType>({ resolver: zodResolver(VehicleWithOutId) });
+  } = useForm<VehicleCreationSchemaType>({ resolver: zodResolver(VehicleWithOutCustomerId) });
   //
   const handleInputChange = async (field: keyof VehicleCreationSchemaType) => {
     await trigger(field);
@@ -49,25 +47,22 @@ export const VehicleForm = () => {
 
   const onSubmit: SubmitHandler<VehicleCreationSchemaType> = (data) => {
     setIsLoading(true);
-    // mutation.mutate(data, {
-    //   onSuccess: () => {
-    //     toast.success('Cliente registrado exitosamente');
-    //     reset();
-    //     setIsLoading(false);
-    //   },
-    //   onError: (error) => {
-    //     console.log(error);
-    //     if (error instanceof AxiosError) {
-    //       toast.error(error.response?.data.message);
-    //       setIsLoading(false);
-    //     } else {
-    //       toast.error('Error al enviar los datos');
-    //     }
-    //   },
-    // });
-    toast(JSON.stringify(data), { duration: 5000 });
-    console.log(data);
-    setIsLoading(false);
+    mutation.mutate(data, {
+      onSuccess: () => {
+        toast.success('Vehículo registrado exitosamente');
+        reset();
+        setIsLoading(false);
+      },
+      onError: (error) => {
+        console.error(error);
+        if (error instanceof AxiosError) {
+          toast.error(error.response?.data.message);
+          setIsLoading(false);
+        } else {
+          toast.error('Error al enviar los datos');
+        }
+      },
+    });
   };
 
   return (

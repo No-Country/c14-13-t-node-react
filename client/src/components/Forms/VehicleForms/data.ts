@@ -1,5 +1,5 @@
 import { FormItems } from '@/types/formTypes';
-import { VehicleCreationSchemaType } from './types';
+import { VehicleCreationSchemaType } from '@/types/common';
 
 const doorOptions: VehicleCreationSchemaType['doors'][] = ['2 Puertas', '4 Puertas'];
 
