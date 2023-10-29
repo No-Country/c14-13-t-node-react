@@ -1,13 +1,17 @@
 import type { Session } from 'next-auth';
 import { z } from 'zod';
 import { AuthBaseSchema } from '@/schemas/AuthSchema';
+import { CustomerCreationSchema } from '@/schemas/CustomerSchema';
 import {
-  CustomerCreationSchema,
-  CustomerCreationSchema as NewCustomerSchema,
-} from '@/schemas/CustomerSchema';
-import { VehicleCreationSchema } from '@/schemas/VehicleSchema';
+  VehicleCreationSchema,
+  VehicleWithOutCustomerId,
+  VehicleSchema,
+} from '@/schemas/VehicleSchema';
 import { MechanicCreationSchema } from '@/schemas/MechanicSchema';
-import { WorkshopServiceCreationSchema } from '@/schemas/WorkshopServicesSchema';
+import {
+  WorkshopServiceCreationSchema,
+  WorkshopServiceSchema,
+} from '@/schemas/WorkshopServicesSchema';
 import { WorkshopCreationSchema } from '@/schemas/WorkshopSchema';
 import { NewEmployeeCreationSchema } from '@/schemas/EmployeeSchema';
 import { OrderCreationSchema } from '@/schemas/OrderSchema';
@@ -21,6 +25,41 @@ export type SessionUser = ExtractProperties<Session['user']>;
 export type NewUser = z.infer<typeof AuthBaseSchema>;
 export type NewCustomer = z.infer<typeof CustomerCreationSchema>;
 export type Customer = NewCustomer & { id: number; isActive: boolean };
+
+export type NewVehicle = z.infer<typeof VehicleCreationSchema>;
+export type Vehicles = NewVehicle;
+
+export type NewMechanic = z.infer<typeof MechanicCreationSchema>;
+export type Mechanics = NewMechanic;
+
+export type NewWorkshopService = z.infer<typeof WorkshopServiceCreationSchema>;
+export type WorkshopService = z.infer<typeof WorkshopServiceSchema>;
+
+export type NewWorkshop = z.infer<typeof WorkshopCreationSchema>;
+export type Workshops = NewWorkshop;
+
+export type NewEmployee = z.infer<typeof NewEmployeeCreationSchema>;
+export type Employees = NewEmployee;
+
+export type ActionBase<T extends string | number> = {
+  id: T;
+  category:
+    | 'customers'
+    | 'vehicles'
+    | 'users'
+    | 'employees'
+    | 'orders'
+    | 'mechanics'
+    | 'services';
+  deleteDescription: string;
+  deleteFunction: (id: T) => Promise<Record<string, unknown>>;
+};
+
+export type NewOrder = z.infer<typeof OrderCreationSchema>;
+export type Orders = NewOrder;
+export type Vehicle = z.infer<typeof VehicleSchema>;
+export type VehicleCreationSchemaType = z.infer<typeof VehicleWithOutCustomerId>;
+export type WorkshopServiceCreationSchemaType = z.infer<typeof WorkshopServiceCreationSchema>;
 
 export type Statistics = {
   counters: {
@@ -81,33 +120,3 @@ export type FullOrder = {
     name: string;
   };
 };
-export type NewVehicle = z.infer<typeof VehicleCreationSchema>;
-export type Vehicles = NewVehicle;
-
-export type NewMechanic = z.infer<typeof MechanicCreationSchema>;
-export type Mechanics = NewMechanic;
-
-export type NewWorkshopService = z.infer<typeof WorkshopServiceCreationSchema>;
-export type WorkshopServices = NewWorkshopService;
-
-export type NewWorkshop = z.infer<typeof WorkshopCreationSchema>;
-export type Workshops = NewWorkshop;
-
-export type NewEmployee = z.infer<typeof NewEmployeeCreationSchema>;
-export type Employees = NewEmployee;
-
-export type ActionBase = {
-  id: string | number;
-  category:
-    | 'customers'
-    | 'vehicles'
-    | 'users'
-    | 'employees'
-    | 'orders'
-    | 'mechanics'
-    | 'services';
-  deleteDescription: string;
-};
-
-export type NewOrder = z.infer<typeof OrderCreationSchema>;
-export type Orders = NewOrder;

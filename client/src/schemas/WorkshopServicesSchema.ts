@@ -34,6 +34,19 @@ export const WorkshopServiceBaseSchema = z.object({
 });
 
 export const WorkshopServiceCreationSchema = WorkshopServiceBaseSchema;
+export const WorkshopServiceApiSchema = WorkshopServiceBaseSchema.omit({
+  servicePrice: true,
+}).extend({
+  servicePrice: z.number().transform((value) => {
+    const float = parseFloat(value.toFixed(2));
+    if (isNaN(float)) {
+      throw new Error(
+        'El precio del servicio debe ser un numero valido. Para indicar decimales utilice "."',
+      );
+    }
+    return float;
+  }),
+});
 export const WorkshopServiceSchema = WorkshopServiceBaseSchema.extend({
   id: z.number().int().positive(),
   isActive: z.boolean(),

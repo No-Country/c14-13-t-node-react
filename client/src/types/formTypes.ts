@@ -20,7 +20,7 @@ export interface ControlledSelectProps<T extends FieldValues> extends BaseFormPr
 }
 
 export interface FormFieldProps<T extends FieldValues> extends BaseFormProps<T> {
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'number';
   register: UseFormRegister<T>;
   handleInputChange: (field: keyof T) => void;
 }

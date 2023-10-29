@@ -34,10 +34,11 @@ export const VehicleBaseSchema = z.object({
   color: z.string().min(1, 'El campo debe tener al menos 1 caracter'),
   doors: z.enum(['2 Puertas', '4 Puertas']),
   customerId: z.number().min(1, 'El campo debe tener al menos 1 caracter'),
-  isActive: z.boolean(),
 });
 
 export const VehicleCreationSchema = VehicleBaseSchema;
+export const VehicleWithOutCustomerId = VehicleCreationSchema.omit({ customerId: true });
 export const VehicleSchema = VehicleBaseSchema.extend({
   id: z.number().int().positive(),
+  isActive: z.boolean(),
 });

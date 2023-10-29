@@ -30,15 +30,3 @@ export const deleteUser = async (userId: number) => {
   const response = await axiosClient.delete(`/users/${userId}`);
   return response.data;
 };
-
-//Vehicles Crud
-
-// export const createVehicle = async <T>(userData: T) => {
-//   const result = await axiosClient.post<Algo>('/vehicules', userData);
-//   return result.data;
-// };
-
-// export const getVehicles = async () => {
-//   const result = await axiosClient.get<Algo[]>('/vehicules');
-//   return result.data;
-// };
