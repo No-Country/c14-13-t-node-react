@@ -1,11 +1,13 @@
 import React from 'react';
-// import { CustomersTable } from '@/components/CustomersTable';
+import { VehiclesTable } from '@/components/Tables';
 import { TableSkeleton } from '@/components/TableSkeleton';
 
 export default function page() {
   return (
     <>
-      <TableSkeleton />
+      <VehiclesTable>
+        <TableSkeleton />
+      </VehiclesTable>
     </>
   );
 }

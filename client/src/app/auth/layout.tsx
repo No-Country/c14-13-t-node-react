@@ -11,7 +11,7 @@ export default function AuthLayout({
       <section className='hidden h-auto w-1/2 items-center justify-center bg-slate-300/80 dark:bg-slate-900 md:flex'>
         <div className='relative flex h-5/6 w-5/6 flex-col items-center'>
           <Image alt='Workshop' src='/images/car.svg' fill />
-          <Text variant='specialTitle' className='mt-4 text-center text-[3rem]'>
+          <Text variant='specialTitle' className='mt-1 text-center text-[3rem]'>
             GarageGuest
           </Text>
         </div>

@@ -5,7 +5,6 @@ import { StatisticsCard, StatisticsCardProps } from './StatisticsCard';
 import { Spinner } from '../ui';
 import { getStatistics } from '@/services/statisticsService';
 import { Users, BadgeDollarSign, BookOpenCheck, CarFront, Wrench } from 'lucide-react';
-import { getNewOrders } from '@/services/ordersService';
 import NewstOrdersTable from './NewstOrdersTable';
 
 export const StatisticsBoard = () => {
@@ -22,9 +21,6 @@ export const StatisticsBoard = () => {
     refetchOnMount: false,
   });
 
-  // if (isLoading) return <>{children}</>;
-  // if (isError) return <div>Error: {String(error)}</div>;
-
   useEffect(() => {
     if (!!statistics) {
       const chartLabels = statistics.popularServices.topServices.map(
@@ -39,10 +35,14 @@ export const StatisticsBoard = () => {
       setChartComponent(
         <ApexChart
           type='donut'
-          width={410}
+          width={430}
           options={{
             chart: {
               type: 'donut',
+            },
+            legend: {
+              fontSize: '13px',
+              fontWeight: 600,
             },
             labels: [...chartLabels, 'Otros'],
           }}
@@ -66,10 +66,6 @@ export const StatisticsBoard = () => {
       </div>
     );
   }
-
-  // if (statistics) {
-  //   console.log(statistics);
-  // }
 
   const data: StatisticsCardProps[] = [
     {
@@ -108,7 +104,6 @@ export const StatisticsBoard = () => {
       iconColor: 'text-gray-400',
     },
   ];
-  console.log(statistics);
 
   return (
     <>

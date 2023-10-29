@@ -9,11 +9,11 @@ import {
   Text,
 } from '@/components/ui';
 import { useQuery } from '@tanstack/react-query';
-import { getCustomers } from '@/services/customerService';
+import { deleteCustomer, getCustomers } from '@/services/customerService';
 import { usePagination } from '@/hooks/usePagination';
-import { StatusChip } from './StatusChip';
-import { ActionsButtons } from './ActionsButtons';
-import { TableContainer } from './TableContainer';
+import { StatusChip } from '../StatusChip';
+import { ActionsButtons } from '../ActionsButtons';
+import { TableContainer } from '../TableContainer';
 
 export const CustomersTable = ({ children }: { children: React.ReactNode }) => {
   const { data, isLoading, isError, error } = useQuery({
@@ -72,9 +72,12 @@ export const CustomersTable = ({ children }: { children: React.ReactNode }) => {
                 </TableCell>
                 <TableCell className='flex items-center justify-center'>
                   <ActionsButtons
+                    deleteFunction={deleteCustomer}
                     id={id}
                     category='customers'
-                    deleteDescription={`Esta seguro que desea borrar al cliente ${firstName} ${lastName}`}
+                    deleteDescription={`Esta seguro que desea borrar al cliente ${firstName} ${lastName},
+                    también se borraran sus vehículos y ordenes
+                    `}
                   />
                 </TableCell>
               </TableRow>

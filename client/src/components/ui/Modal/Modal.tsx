@@ -68,13 +68,7 @@ function PortalImpl({
       }
     };
   }, [closeOnClickOutside, onClose]);
-  console.log(isVisible);
-  console.log(
-    cn(
-      'relative flex max-h-[95%] min-h-[6.25rem] min-w-[18.75rem] max-w-[96vw] grow-0 flex-col overflow-hidden rounded-[0.3125rem] bg-gray-300 p-3 dark:bg-primary-lightBackground',
-      isVisible ? 'animate-fadeIn' : 'animate-fadeOut',
-    ),
-  );
+
   return (
     <div
       className={cn(
