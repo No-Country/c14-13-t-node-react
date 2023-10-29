@@ -5,9 +5,14 @@ import { useModal } from '@/hooks/useModal';
 import { ActionBase } from '@/types/common';
 import { DeleteModal } from './DeleteModal';
 
-interface ActionsButtonsProps extends ActionBase {}
+interface ActionsButtonsProps<T extends string | number> extends ActionBase<T> {}
 
-export const ActionsButtons = ({ id, category, deleteDescription }: ActionsButtonsProps) => {
+export const ActionsButtons = <T extends string | number>({
+  id,
+  category,
+  deleteDescription,
+  deleteFunction,
+}: ActionsButtonsProps<T>) => {
   const [deleteModal, showDeleteModal] = useModal();
 
   const handleDelete = () => {
@@ -17,6 +22,7 @@ export const ActionsButtons = ({ id, category, deleteDescription }: ActionsButto
         deleteDescription={deleteDescription}
         id={id}
         onClose={onClose}
+        deleteFunction={deleteFunction}
       />
     ));
   };

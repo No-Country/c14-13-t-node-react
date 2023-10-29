@@ -7,34 +7,27 @@ import { FormField } from '@/components';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useQuery } from '@tanstack/react-query';
 import { createWorkshopServiceFields } from './data';
-import { WorkshopServiceCreationSchemaType } from './types';
+import { WorkshopServiceCreationSchemaType } from '@/types/common';
 import { WorkshopServiceCreationSchema } from '@/schemas/WorkshopServicesSchema';
+import { createWorkshopService } from '@/services/workshopService';
 
 export const WorkshopServiceForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
-  //   const mutation = useMutation({
-  //     mutationFn: (data: WorkshopServiceCreationSchemaType) => {
-  //       return registerCustomer(data);
-  //     },
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries(['customers'], { refetchType: 'all' });
-  //       //Otra manera de actualizar el cache es tomar la respuesta de la mutation y añadirlo al cache:
-  //       // queryClient.setQueriesData(['customers'], (oldData) => {
-  //       //   return {
-  //       //     customers: [...(oldData as { customers: Customer[] })?.customers, data.customer],
-  //       //   };
-  //       // });
-  //     },
-  //   });
+  const mutation = useMutation({
+    mutationFn: (data: WorkshopServiceCreationSchemaType) => {
+      return createWorkshopService(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['services'], { refetchType: 'all' });
+    },
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
     trigger,
-    control,
     reset,
   } = useForm<WorkshopServiceCreationSchemaType>({
     resolver: zodResolver(WorkshopServiceCreationSchema),
@@ -46,25 +39,22 @@ export const WorkshopServiceForm = () => {
 
   const onSubmit: SubmitHandler<WorkshopServiceCreationSchemaType> = (data) => {
     setIsLoading(true);
-    // mutation.mutate(data, {
-    //   onSuccess: () => {
-    //     toast.success('Cliente registrado exitosamente');
-    //     reset();
-    //     setIsLoading(false);
-    //   },
-    //   onError: (error) => {
-    //     console.log(error);
-    //     if (error instanceof AxiosError) {
-    //       toast.error(error.response?.data.message);
-    //       setIsLoading(false);
-    //     } else {
-    //       toast.error('Error al enviar los datos');
-    //     }
-    //   },
-    // });
-    toast(JSON.stringify(data), { duration: 5000 });
-    console.log(data);
-    setIsLoading(false);
+    mutation.mutate(data, {
+      onSuccess: () => {
+        toast.success('Servicio registrado exitosamente');
+        reset();
+        setIsLoading(false);
+      },
+      onError: (error) => {
+        console.log(error);
+        if (error instanceof AxiosError) {
+          toast.error(error.response?.data.message);
+          setIsLoading(false);
+        } else {
+          toast.error('Error al enviar los datos');
+        }
+      },
+    });
   };
 
   return (

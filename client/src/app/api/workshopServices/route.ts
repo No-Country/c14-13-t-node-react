@@ -4,7 +4,7 @@ import {
   getAllWorkshopServices,
   createWorkshopService,
 } from '@/server/services/workshopServices';
-import { WorkshopServiceCreationSchema as NewWorkshopServicesSchema } from '@/schemas/WorkshopServicesSchema';
+import { WorkshopServiceApiSchema as NewWorkshopServicesSchema } from '@/schemas/WorkshopServicesSchema';
 
 export async function GET(request: Request) {
   try {

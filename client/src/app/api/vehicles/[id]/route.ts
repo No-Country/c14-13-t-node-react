@@ -38,7 +38,7 @@ export async function PATCH(request: Request, { params }: { params: { id: number
 
 export async function DELETE(request: Request, { params }: any) {
   const { id } = params;
-  const vehicle = await prisma.vehicle.delete({ where: { id: id } });
+  const vehicle = await prisma.vehicle.delete({ where: { id: parseInt(id) } });
 
   return NextResponse.json(vehicle, { status: 200 });
 }
