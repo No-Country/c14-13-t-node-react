@@ -12,7 +12,7 @@ deadline: z
     .datetime(),
 cost: z
     .number()
-    .max(10, "")
+    .max(10, "El Costo no puede superar las 10 cifras")
     .multipleOf(0.01),
 workshopId: z
     .number(),
