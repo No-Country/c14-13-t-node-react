@@ -1,4 +1,10 @@
-import type { NewCustomer, Customer } from '@/types/common';
+import type {
+  NewCustomer,
+  Customer,
+  CustomerUpdate,
+  FullOrder,
+  Vehicle,
+} from '@/types/common';
 import { axiosClient } from './AxiosClient';
 
 //Users Crud
@@ -17,8 +23,16 @@ export const getCustomerById = async (id: number) => {
   const result = await axiosClient.get<{ customer: Customer }>(`/customers/${id}`);
   return result.data;
 };
+export const getCustomerVehicles = async (id: number) => {
+  const result = await axiosClient.get<{ vehicles: Vehicle[] }>(`/customers/${id}/vehicles`);
+  return result.data;
+};
+export const getCustomerOrders = async (id: number) => {
+  const result = await axiosClient.get<{ orders: FullOrder[] }>(`/customers/${id}/orders`);
+  return result.data;
+};
 
-export const updateCustomer = async (id: number, customerData: NewCustomer) => {
+export const updateCustomer = async (id: number, customerData: CustomerUpdate) => {
   const result = await axiosClient.put<{ customer: Customer }>(
     `/customers/${id}`,
     customerData,

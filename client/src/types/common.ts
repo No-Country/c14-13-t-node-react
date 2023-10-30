@@ -1,19 +1,23 @@
 import type { Session } from 'next-auth';
 import { z } from 'zod';
 import { AuthBaseSchema } from '@/schemas/AuthSchema';
-import { CustomerCreationSchema } from '@/schemas/CustomerSchema';
+import {
+  CustomerCreationSchema,
+  CustomerUpdateSchema,
+  CustomerUpdateFormSchema,
+} from '@/schemas/CustomerSchema';
 import {
   VehicleCreationSchema,
   VehicleWithOutCustomerId,
   VehicleSchema,
 } from '@/schemas/VehicleSchema';
-import { MechanicCreationSchema } from '@/schemas/MechanicSchema';
+import { MechanicCreationSchema, MechanicSchema } from '@/schemas/MechanicSchema';
 import {
   WorkshopServiceCreationSchema,
   WorkshopServiceSchema,
 } from '@/schemas/WorkshopServicesSchema';
 import { WorkshopCreationSchema } from '@/schemas/WorkshopSchema';
-import { NewEmployeeCreationSchema } from '@/schemas/EmployeeSchema';
+import { EmployeeSchema, NewEmployeeCreationSchema } from '@/schemas/EmployeeSchema';
 import { OrderCreationSchema } from '@/schemas/OrderSchema';
 
 export type ExtractProperties<T> = {
@@ -23,14 +27,17 @@ export type ExtractProperties<T> = {
 export type SessionUser = ExtractProperties<Session['user']>;
 
 export type NewUser = z.infer<typeof AuthBaseSchema>;
+
 export type NewCustomer = z.infer<typeof CustomerCreationSchema>;
+export type CustomerUpdate = z.infer<typeof CustomerUpdateSchema>;
+export type CustomerUpdateForm = z.infer<typeof CustomerUpdateFormSchema>;
 export type Customer = NewCustomer & { id: number; isActive: boolean };
 
 export type NewVehicle = z.infer<typeof VehicleCreationSchema>;
 export type Vehicles = NewVehicle;
 
 export type NewMechanic = z.infer<typeof MechanicCreationSchema>;
-export type Mechanics = NewMechanic;
+export type Mechanic = z.infer<typeof MechanicSchema>;
 
 export type NewWorkshopService = z.infer<typeof WorkshopServiceCreationSchema>;
 export type WorkshopService = z.infer<typeof WorkshopServiceSchema>;
@@ -39,7 +46,7 @@ export type NewWorkshop = z.infer<typeof WorkshopCreationSchema>;
 export type Workshops = NewWorkshop;
 
 export type NewEmployee = z.infer<typeof NewEmployeeCreationSchema>;
-export type Employees = NewEmployee;
+export type Employee = z.infer<typeof EmployeeSchema>;
 
 export type ActionBase<T extends string | number> = {
   id: T;
@@ -59,7 +66,6 @@ export type NewOrder = z.infer<typeof OrderCreationSchema>;
 export type Orders = NewOrder;
 export type Vehicle = z.infer<typeof VehicleSchema>;
 export type VehicleCreationSchemaType = z.infer<typeof VehicleWithOutCustomerId>;
-export type WorkshopServiceCreationSchemaType = z.infer<typeof WorkshopServiceCreationSchema>;
 
 export type Statistics = {
   counters: {
@@ -95,6 +101,7 @@ export type FullOrder = {
   mechanicId: number;
   vehicleId: number;
   employeeId: number;
+  status: 'pending' | 'inProgress' | 'finished';
   vehicle: {
     plate: string;
     customer: {

@@ -31,7 +31,19 @@ export const CustomerBaseSchema = PersonSchema.extend({
 });
 
 export const CustomerCreationSchema = CustomerBaseSchema;
-
+/**
+ * Este es el que se debe usar en la entrada de la API PATCH
+ */
+export const CustomerUpdateSchema = CustomerBaseSchema.extend({
+  isActive: z.boolean(),
+});
+/**
+ * Solo para el formulario de Editar,
+ * Para este campo es mas fácil usar un select
+ */
+export const CustomerUpdateFormSchema = CustomerBaseSchema.extend({
+  isActive: z.enum(['Activo', 'Inactivo']),
+});
 export const CustomerSchema = CustomerBaseSchema.extend({
   id: z.number().int().positive(),
   isActive: z.boolean(),
