@@ -23,25 +23,3 @@ export const removeOrder = async (id: number) => {
   return deleteOrder;
 }
 
-//? FEATURES
-
-//por fecha de entrada de vehiculo
-export const getAllOrderByEntryDate = async (entryDate: Date) => {
-  const dataOrder = await prisma.order.findMany({where: {entryDate}})
-  return dataOrder
-}
-
-//por fecha de salida de vehiculo
-export const getAllOrderByDepartureDate = async (entryDate: Date) => {
-  
-}
-
-//por ordenes emitida por empleado en especifico
-export const getOrderByEmployyeId = async (entryDate: Date) => {
-  
-}
-
-//por ordenes mecanicos que realizaron el servicio de reparacion
-export const getOrderBymechanicId = async (entryDate: Date) => {
-  
-}

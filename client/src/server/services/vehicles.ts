@@ -7,8 +7,8 @@ export const getAllVehicles = async () => {
   };
 
   // ERROR DE TIPO  REVISAR RAD
-  export const getVehicleByPlate = async (plate : string) => {
-    const vehicle = await prisma.vehicle.findUnique({ where: { plate  } });
+  export const getVehicleByPlate = async (PLATE : string) => {
+    const vehicle = await prisma.vehicle.findUnique({ where: { plate : PLATE  } });
     return vehicle;
   };
 
@@ -16,11 +16,10 @@ export const getAllVehicles = async () => {
     return await prisma.vehicle.create({ data: vehicleData });
   };
 
-  export const updateVehicle = async (vehicleData: UpdateVehicle) => {
-    return await prisma.vehicle.update({ where: { plate } });
+  export const updateVehicle = async (id: number, vehicleData: NewVehicle) => {
+    return await prisma.vehicle.update({ where: { id }, data : vehicleData });
   };
 
-  export const deleteVehicle = async (vehicleData: deleteVehicle) => {
-    return await prisma.vehicle.delete({ where: { plate } })
+  export const deleteVehicle = async (id : number) => {
+    return await prisma.vehicle.delete({ where: { id } })
   }
- 
