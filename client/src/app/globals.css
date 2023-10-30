@@ -61,6 +61,19 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+/* WebKit (Safari and Chrome) */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 60%);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 26%);
+}
 
 body {
   color: rgb(var(--foreground-rgb));

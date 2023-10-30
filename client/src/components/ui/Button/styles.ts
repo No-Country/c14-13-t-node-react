@@ -18,6 +18,7 @@ export const buttonVariants = cva('disabled:pointer-events-none', {
         'flex min-w-[7rem] items-center justify-center rounded-lg border border-[#5f63f2] bg-gray-200 p-2 text-base font-medium text-gray-800 duration-300 hover:border-gray-400 hover:bg-gray-100 hover:text-gray-950 dark:bg-gray-200 dark:hover:bg-gray-300/70',
       delete:
         'flex min-w-[7rem] items-center justify-center rounded-lg border-[#5f63f2] bg-red-400 p-2 text-base font-medium text-white duration-300 hover:border-[#8c94ff] hover:bg-red-400/90 hover:text-white',
+      edit: 'flex h-8 w-8 items-center justify-center rounded-lg border-[#5f63f2] bg-[#5f63f2] text-base font-medium text-gray-900 duration-300 hover:border-[#8c94ff] hover:bg-[#8c94ff] hover:text-white',
     },
   },
   defaultVariants: {
