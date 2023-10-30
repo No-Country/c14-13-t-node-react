@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
 import { handleCommonError } from '@/server/errorHandlers';
-// import { getMechanicById, updateMechanic, removeMechanic } from '@/server/services/mechanics';
-// import { MechanicCreationSchema as NewMechanicSchema } from '@/schemas/MechanicSchema';
-import { Prisma } from '@prisma/client';
 import { prisma } from '@/server/db';
 
 interface Params {
