@@ -26,7 +26,6 @@ const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
         Ultimas Ordenes
       </Text>
       <Table>
-        {/* <TableCaption>Lista de Usuarios</TableCaption> */}
         <TableHeader>
           <TableRow>
             {tableHead.map((head) => (
@@ -48,9 +47,9 @@ const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
             return (
               <TableRow key={id}>
                 <TableCell>{id}</TableCell>
-                <TableCell>{`${vehicle.customer.firstName} ${vehicle.customer.lastName}`}</TableCell>
-                <TableCell>{`${vehicle.plate.toUpperCase()}`}</TableCell>
-                <TableCell>{orderServices[0].service.service}</TableCell>
+                <TableCell>{`${vehicle?.customer.firstName} ${vehicle?.customer.lastName}`}</TableCell>
+                <TableCell>{`${vehicle?.plate.toUpperCase()}`}</TableCell>
+                <TableCell>{orderServices[0]?.service.service ?? 'Aspirado'}</TableCell>
                 <TableCell>{formatedDate}</TableCell>
                 <TableCell>
                   {cost.toLocaleString('en-US', {
@@ -61,6 +60,9 @@ const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
                 </TableCell>
                 <TableCell className='flex items-center justify-center'>
                   <ActionsButtons
+                    deleteFunction={() =>
+                      console.log(id) as unknown as Promise<Record<string, unknown>>
+                    }
                     id={id}
                     category='orders'
                     deleteDescription={`Esta seguro que desea borrar la orden ${id}`}

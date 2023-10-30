@@ -51,6 +51,9 @@ export const UsersTable = ({ children }: { children: React.ReactNode }) => {
               </TableCell>
               <TableCell className='flex items-center justify-center'>
                 <ActionsButtons
+                  deleteFunction={() =>
+                    console.log(id) as unknown as Promise<Record<string, unknown>>
+                  }
                   deleteDescription={`Esta seguro que desea borrar al Usuario ${
                     name ?? username
                   }`}

@@ -79,7 +79,7 @@ function PortalImpl({
     >
       <div
         className={cn(
-          'relative flex max-h-[95%] min-h-[6.25rem] min-w-[18.75rem] max-w-[96vw] grow-0 flex-col overflow-hidden rounded-[0.3125rem] bg-gray-300 p-3 dark:bg-primary-lightBackground',
+          'relative flex max-h-[95%] min-h-[6.25rem] min-w-[18.75rem] max-w-[96vw] grow-0 flex-col overflow-y-auto rounded-[0.3125rem] bg-gray-300 p-3 dark:bg-primary-lightBackground',
           isVisible ? 'animate-fadeIn' : 'animate-fadeOut',
         )}
         tabIndex={-1}
