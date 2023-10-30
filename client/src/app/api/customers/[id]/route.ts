@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { deleteCustomer, getCustomerById, updateCustomer } from '@/server/services/customers';
 import { handleCommonError } from '@/server/errorHandlers';
-import { CustomerSchema } from '@/schemas/CustomerSchema';
+import { CustomerUpdateSchema } from '@/schemas/CustomerSchema';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
@@ -15,7 +15,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
-    const newData = CustomerSchema.parse(body);
+    const newData = CustomerUpdateSchema.parse(body);
     const customer = await updateCustomer(parseInt(params.id), newData);
     return NextResponse.json({ customer }, { status: 200 });
   } catch (error) {

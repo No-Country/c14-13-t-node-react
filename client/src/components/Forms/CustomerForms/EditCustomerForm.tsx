@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CustomerCreationSchema } from '@/schemas/CustomerSchema';
+import { CustomerUpdateFormSchema } from '@/schemas/CustomerSchema';
 import { Text, Button, Spinner, FormContainer } from '@/components/ui';
 import { FormField } from '@/components';
 import { toast } from 'sonner';
@@ -25,7 +25,10 @@ export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFor
   const mutation = useMutation({
     mutationFn: (data: CustomerUpdateForm) => {
       const { isActive, ...rest } = data;
+      console.log(data);
+      console.log(isActive);
       const newData = { ...rest, isActive: isActive === 'Activo' };
+      console.log(newData);
       return updateCustomer(id, newData);
     },
     onSuccess: () => {
@@ -40,7 +43,7 @@ export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFor
     trigger,
     reset,
   } = useForm<CustomerUpdateForm>({
-    resolver: zodResolver(CustomerCreationSchema),
+    resolver: zodResolver(CustomerUpdateFormSchema),
     defaultValues,
   });
   const handleInputChange = async (field: keyof CustomerUpdateForm) => {
@@ -70,7 +73,7 @@ export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFor
   };
 
   return (
-    <FormContainer className='m-auto mt-7'>
+    <FormContainer className='m-auto mt-7 bg-gray-300'>
       <Text variant='title' className='text-center'>
         Editar Cliente
       </Text>

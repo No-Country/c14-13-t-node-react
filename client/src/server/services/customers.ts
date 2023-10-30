@@ -1,5 +1,5 @@
 import { prisma } from '@/server/db';
-import type { NewCustomer, Customer } from '@/types/common';
+import type { NewCustomer, Customer, CustomerUpdate } from '@/types/common';
 
 export const getCustomerById = async (id: number) => {
   const customer = await prisma.customer.findUnique({ where: { id } });
@@ -17,9 +17,8 @@ export const getCustomers = async () => {
   return await prisma?.customer.findMany();
 };
 
-export const updateCustomer = async (id: number, customerData: Customer) => {
-  const { id: ids, ...rest } = customerData;
-  return await prisma.customer.update({ where: { id }, data: rest });
+export const updateCustomer = async (id: number, customerData: CustomerUpdate) => {
+  return await prisma.customer.update({ where: { id }, data: customerData });
 };
 
 export const deleteCustomer = async (id: number) => {
