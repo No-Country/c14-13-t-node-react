@@ -6,12 +6,12 @@ export const OrderBaseSchema = z.object({
     .datetime(),
   departureDate: z.string().datetime(),
   deadline: z.string().datetime(),
-  cost: z.number().max(10, '').multipleOf(0.01),
   workshopId: z.number(),
   mechanicId: z.number(),
   vehicleId: z.number(),
   employeeId: z.number(),
   status: z.enum(['Pendiente', 'En proceso', 'Finalizado']),
+  cost: z.number().max(9999999999, 'El Costo no puede superar las 10 cifras').multipleOf(0.01),
 });
 
 export const OrderCreationSchema = OrderBaseSchema;

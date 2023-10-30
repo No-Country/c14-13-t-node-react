@@ -11,10 +11,17 @@ export const createOrder = async (orderData: NewOrder) => {
   return await prisma.order.create({ data: { ...orderData, status } });
 };
 
-export const getEmployeeById = async (params: NewOrder) => {
-  return await prisma.order.findFirst();
+export const getOrderById = async (id: number) => {
+  const order = await prisma.order.findFirst({ where: { id } });
+  return order;
 };
 
-export const updateEmployee = async (params: NewOrder) => {};
+export const updateOrder = async (id: number, orderData: NewOrder) => {
+  const status = convertStatusFromZod(orderData.status);
+  return await prisma.order.update({ where: { id }, data: { ...orderData, status } });
+};
 
-export const removeEmployee = async (params: NewOrder) => {};
+export const removeOrder = async (id: number) => {
+  const deleteOrder = await prisma.order.delete({ where: { id } });
+  return deleteOrder;
+};

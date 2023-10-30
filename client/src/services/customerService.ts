@@ -33,7 +33,7 @@ export const getCustomerOrders = async (id: number) => {
 };
 
 export const updateCustomer = async (id: number, customerData: CustomerUpdate) => {
-  const result = await axiosClient.put<{ customer: Customer }>(
+  const result = await axiosClient.patch<{ customer: Customer }>(
     `/customers/${id}`,
     customerData,
   );
