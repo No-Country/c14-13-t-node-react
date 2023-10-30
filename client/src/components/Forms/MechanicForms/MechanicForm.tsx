@@ -7,64 +7,54 @@ import { FormField } from '@/components';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useQuery } from '@tanstack/react-query';
-import { createEmployeeFields } from './data';
-import { MechanicCreationSchemaType } from './types';
+import { createMechanicFields } from './data';
+import { NewMechanic } from '@/types/common';
 import { MechanicCreationSchema } from '@/schemas/MechanicSchema';
+import { createMechanic } from '@/services/mechanicsService';
 
 export const MechanicForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
-  //   const mutation = useMutation({
-  //     mutationFn: (data: WorkshopServiceCreationSchemaType) => {
-  //       return registerCustomer(data);
-  //     },
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries(['customers'], { refetchType: 'all' });
-  //       //Otra manera de actualizar el cache es tomar la respuesta de la mutation y añadirlo al cache:
-  //       // queryClient.setQueriesData(['customers'], (oldData) => {
-  //       //   return {
-  //       //     customers: [...(oldData as { customers: Customer[] })?.customers, data.customer],
-  //       //   };
-  //       // });
-  //     },
-  //   });
+  const mutation = useMutation({
+    mutationFn: (data: NewMechanic) => {
+      return createMechanic(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['mechanics'], { refetchType: 'all' });
+    },
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
     trigger,
-    control,
     reset,
-  } = useForm<MechanicCreationSchemaType>({
+  } = useForm<NewMechanic>({
     resolver: zodResolver(MechanicCreationSchema),
   });
   //
-  const handleInputChange = async (field: keyof MechanicCreationSchemaType) => {
+  const handleInputChange = async (field: keyof NewMechanic) => {
     await trigger(field);
   };
 
-  const onSubmit: SubmitHandler<MechanicCreationSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<NewMechanic> = (data) => {
     setIsLoading(true);
-    // mutation.mutate(data, {
-    //   onSuccess: () => {
-    //     toast.success('Cliente registrado exitosamente');
-    //     reset();
-    //     setIsLoading(false);
-    //   },
-    //   onError: (error) => {
-    //     console.log(error);
-    //     if (error instanceof AxiosError) {
-    //       toast.error(error.response?.data.message);
-    //       setIsLoading(false);
-    //     } else {
-    //       toast.error('Error al enviar los datos');
-    //     }
-    //   },
-    // });
-    toast(JSON.stringify(data), { duration: 5000 });
-    console.log(data);
-    setIsLoading(false);
+    mutation.mutate(data, {
+      onSuccess: () => {
+        toast.success('Mecánico registrado exitosamente');
+        reset();
+        setIsLoading(false);
+      },
+      onError: (error) => {
+        console.log(error);
+        if (error instanceof AxiosError) {
+          toast.error(error.response?.data.message);
+          setIsLoading(false);
+        } else {
+          toast.error('Error al enviar los datos');
+        }
+      },
+    });
   };
 
   return (
@@ -73,7 +63,7 @@ export const MechanicForm = () => {
         Añadir Mecánico
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {createEmployeeFields.map((field) => {
+        {createMechanicFields.map((field) => {
           return (
             <FormField
               key={field.id}

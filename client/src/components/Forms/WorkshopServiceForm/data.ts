@@ -1,7 +1,7 @@
-import { WorkshopServiceCreationSchemaType } from '@/types/common';
+import { NewWorkshopService } from '@/types/common';
 import { FormItems } from '@/types/formTypes';
 
-export const createWorkshopServiceFields: FormItems<WorkshopServiceCreationSchemaType> = [
+export const createWorkshopServiceFields: FormItems<NewWorkshopService> = [
   {
     id: 'service',
     label: 'Nombre del Servicio',

@@ -1,7 +1,7 @@
-import { NewEmployeeCreationSchemaType } from './types';
+import { NewEmployee } from '@/types/common';
 import { FormItems } from '@/types/formTypes';
 
-export const createEmployeeFields: FormItems<NewEmployeeCreationSchemaType> = [
+export const createEmployeeFields: FormItems<NewEmployee> = [
   {
     id: 'name',
     label: 'Nombre',

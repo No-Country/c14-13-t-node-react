@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createWorkshopServiceFields } from './data';
-import { WorkshopServiceCreationSchemaType } from '@/types/common';
+import { NewWorkshopService } from '@/types/common';
 import { WorkshopServiceCreationSchema } from '@/schemas/WorkshopServicesSchema';
 import { createWorkshopService } from '@/services/workshopService';
 
@@ -16,7 +16,7 @@ export const WorkshopServiceForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (data: WorkshopServiceCreationSchemaType) => {
+    mutationFn: (data: NewWorkshopService) => {
       return createWorkshopService(data);
     },
     onSuccess: () => {
@@ -29,15 +29,15 @@ export const WorkshopServiceForm = () => {
     formState: { errors },
     trigger,
     reset,
-  } = useForm<WorkshopServiceCreationSchemaType>({
+  } = useForm<NewWorkshopService>({
     resolver: zodResolver(WorkshopServiceCreationSchema),
   });
   //
-  const handleInputChange = async (field: keyof WorkshopServiceCreationSchemaType) => {
+  const handleInputChange = async (field: keyof NewWorkshopService) => {
     await trigger(field);
   };
 
-  const onSubmit: SubmitHandler<WorkshopServiceCreationSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<NewWorkshopService> = (data) => {
     setIsLoading(true);
     mutation.mutate(data, {
       onSuccess: () => {

@@ -1,7 +1,7 @@
-import { MechanicCreationSchemaType } from './types';
+import { NewMechanic } from '@/types/common';
 import { FormItems } from '@/types/formTypes';
 
-export const createEmployeeFields: FormItems<MechanicCreationSchemaType> = [
+export const createMechanicFields: FormItems<NewMechanic> = [
   {
     id: 'name',
     label: 'Nombre',

@@ -24,12 +24,9 @@ export const VehicleForm = ({ customerId }: { customerId: number }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['vehicles'], { refetchType: 'all' });
-      //Otra manera de actualizar el cache es tomar la respuesta de la mutation y añadirlo al cache:
-      // queryClient.setQueriesData(['customers'], (oldData) => {
-      //   return {
-      //     customers: [...(oldData as { customers: Customer[] })?.customers, data.customer],
-      //   };
-      // });
+      queryClient.invalidateQueries(['customers-vehicles', customerId], {
+        refetchType: 'all',
+      });
     },
   });
   const {
@@ -39,7 +36,9 @@ export const VehicleForm = ({ customerId }: { customerId: number }) => {
     trigger,
     control,
     reset,
-  } = useForm<VehicleCreationSchemaType>({ resolver: zodResolver(VehicleWithOutCustomerId) });
+  } = useForm<VehicleCreationSchemaType>({
+    resolver: zodResolver(VehicleWithOutCustomerId),
+  });
   //
   const handleInputChange = async (field: keyof VehicleCreationSchemaType) => {
     await trigger(field);
