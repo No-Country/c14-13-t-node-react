@@ -37,7 +37,8 @@ export const WorkshopServicesTable = ({ children }: { children: React.ReactNode 
       </div>
     );
   }
-  const workshopServicesOnCurrentPage = data.workshopServices.slice(
+  const reversedWorkshopServices = [...data.workshopServices].reverse();
+  const workshopServicesOnCurrentPage = reversedWorkshopServices.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );

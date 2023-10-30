@@ -37,7 +37,8 @@ export const CustomersTable = ({ children }: { children: React.ReactNode }) => {
       </div>
     );
   }
-  const customersOnCurrentPage = data.customers.slice(
+  const reversedCustomers = [...data.customers].reverse();
+  const customersOnCurrentPage = reversedCustomers.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
