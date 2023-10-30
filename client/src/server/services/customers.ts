@@ -16,3 +16,12 @@ export const createCustomer = async (customerData: NewCustomer) => {
 export const getCustomers = async () => {
   return await prisma?.customer.findMany();
 };
+
+export const updateCustomer = async (id: number, customerData: NewCustomer) => {
+  return await prisma.customer.update({where: {id}, data: customerData})
+}
+
+export const removeCustomer = async (id: number) => {
+  const deleteCustomer = await prisma.customer.delete({ where: { id }})
+  return deleteCustomer;
+}
