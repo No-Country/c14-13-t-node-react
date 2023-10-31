@@ -18,10 +18,10 @@ const DetailsCard = ({ title, infoRows, handleEdit }: DetailsCardProps) => {
       <span className='flex justify-between'>
         <Text variant='detailsTitle'>{title}</Text>
         <Button variant='edit' title='Editar' aria-label='Editar' onClick={handleEdit}>
-          <Pen size={20} />
+          <Pen size={18} />
         </Button>
       </span>
-      <div className='mt-8 flex flex-col gap-3'>
+      <div className='mt-4 flex flex-col gap-3'>
         {infoRows.map((row) => (
           <div className='flex flex-col justify-between gap-[0.125rem]' key={row.label}>
             <Text variant='detailsLabel'>{row.label}</Text>

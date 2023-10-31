@@ -1,10 +1,10 @@
 import React from 'react';
-import { WorkshopForm } from '@/components/Forms';
+import { WorkshopDetails } from '@/components/DetailsPages';
 
 export default function page() {
   return (
     <>
-      <WorkshopForm />
+      <WorkshopDetails />
     </>
   );
 }

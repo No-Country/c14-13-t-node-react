@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { handleCommonError } from '@/server/errorHandlers';
 import { prisma } from '@/server/db';
+import { MechanicUpdateSchema } from '@/schemas/MechanicSchema';
 
 interface Params {
   params: { id: string };
@@ -16,7 +17,7 @@ export async function GET(request: Request, { params }: Params) {
     if (!mechanic) {
       return NextResponse.json(
         {
-          message: 'Mechanic not Found',
+          message: 'Mecánico no encontrado',
         },
         {
           status: 404,
@@ -31,22 +32,19 @@ export async function GET(request: Request, { params }: Params) {
 
 export async function PATCH(request: Request, { params }: Params) {
   try {
-    const { dni, name, address, city, phone, isActive } = await request.json();
+    const body = await request.json();
+    const newData = MechanicUpdateSchema.parse(body);
     const updateMechanic = await prisma.mechanic.update({
       where: {
         id: Number(params.id),
       },
-      data: {
-        dni,
-        name,
-        address,
-        city,
-        phone,
-        isActive,
-      },
+      data: newData,
     });
     if (!updateMechanic) {
-      return NextResponse.json({ message: 'Not Mechanic Update' }, { status: 404 });
+      return NextResponse.json(
+        { message: 'No se pudo actualizar, mecánico no encontrado' },
+        { status: 404 },
+      );
     }
     return NextResponse.json(updateMechanic);
   } catch (error) {
@@ -63,7 +61,7 @@ export async function DELETE(request: Request, { params }: Params) {
     });
 
     if (!deleteMechanic) {
-      return NextResponse.json({ message: 'No Mechanic Delete' }, { status: 404 });
+      return NextResponse.json({ message: 'El mecánico no existe' }, { status: 404 });
     }
     return NextResponse.json(deleteMechanic);
   } catch (error) {

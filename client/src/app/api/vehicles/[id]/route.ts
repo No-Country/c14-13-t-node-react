@@ -1,36 +1,36 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/server/db';
+import { VehicleUpdateSchema } from '@/schemas/VehicleSchema';
 
-const prisma = new PrismaClient();
-
-//? estoy teniedo un error de tipos con el parametro plate OJOOOOOOOOOO
-
-export async function GET(request: Request, { params }: { params: { id: number } }) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   const { id } = params;
 
-  const vehicle = await prisma.vehicle.findUnique({ where: { id: id } });
+  const vehicle = await prisma.vehicle.findUnique({ where: { id: parseInt(id) } });
 
   return NextResponse.json(vehicle, { status: 200 });
 }
 
-export async function PATCH(request: Request, { params }: { params: { id: number } }) {
+export async function PATCH(request: Request, { params }: { params: { id: string } }) {
   const { id } = params;
-  const { brand, model, comments, vehicleType, mileage, year, color, doors } =
-    await request.json();
+  // const { brand, model, comments, vehicleType, mileage, year, color, doors } =
+  //   await request.json();
+  const body = await request.json();
+  const vehicleData = VehicleUpdateSchema.parse(body);
   const vehicle = await prisma.vehicle.update({
     where: {
-      id: id,
+      id: parseInt(id),
     },
-    data: {
-      brand: brand,
-      model: model,
-      comments: comments,
-      vehicleType: vehicleType,
-      mileage: mileage,
-      year: year,
-      color: color,
-      doors: doors,
-    },
+    data: vehicleData,
+    // {
+    //   brand: brand,
+    //   model: model,
+    //   comments: comments,
+    //   vehicleType: vehicleType,
+    //   mileage: mileage,
+    //   year: year,
+    //   color: color,
+    //   doors: doors,
+    // },
   });
 
   return NextResponse.json(vehicle, { status: 200 });
@@ -42,17 +42,3 @@ export async function DELETE(request: Request, { params }: any) {
 
   return NextResponse.json(vehicle, { status: 200 });
 }
-
-// import { getVehiclesById, updateVehicles, removeVehicle} from '@/server/services/vehicles';
-// import { handleCommonError } from '@/server/errorHandlers';
-// import { VehicleCreationSchema as NewVehicleSchema } from '@/schemas/VehicleSchema';
-
-// export async function DELETE(request: Request) {
-//     try {
-//       const vehiclePlate = await request.json();
-//       const
-//       await removeVehicle.delete(plate)
-//     } catch (error) {
-
-//     }
-//   }
