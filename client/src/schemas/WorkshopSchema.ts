@@ -16,7 +16,7 @@ export const WorkshopBaseSchema = z.object({
     .min(2, 'El nombre debe tener al menos 2 caracteres')
     .max(50, 'El nombre no puede tener más de 50 caracteres')
     .regex(
-      /^[a-zA-Z0-9 _-]+$/,
+      /^[a-zA-Z0-9 ,_-]+$/,
       'El nombre solo puede contener letras, números, guiones y guiones bajos',
     )
     .trim(),

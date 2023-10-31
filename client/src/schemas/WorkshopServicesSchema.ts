@@ -47,6 +47,13 @@ export const WorkshopServiceApiSchema = WorkshopServiceBaseSchema.omit({
     return float;
   }),
 });
+export const WorkshopServiceUpdateSchema = WorkshopServiceApiSchema.extend({
+  isActive: z.boolean(),
+});
+export const WorkshopServiceUpdateFormSchema = WorkshopServiceBaseSchema.extend({
+  isActive: z.enum(['Activo', 'Inactivo']),
+});
+
 export const WorkshopServiceSchema = WorkshopServiceBaseSchema.extend({
   id: z.number().int().positive(),
   isActive: z.boolean(),

@@ -42,3 +42,9 @@ export const VehicleSchema = VehicleBaseSchema.extend({
   id: z.number().int().positive(),
   isActive: z.boolean(),
 });
+export const VehicleUpdateSchema = VehicleBaseSchema.extend({
+  isActive: z.boolean(),
+});
+export const VehicleUpdateFormSchema = VehicleBaseSchema.extend({
+  isActive: z.enum(['Activo', 'Inactivo']),
+});
