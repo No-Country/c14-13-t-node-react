@@ -2,37 +2,37 @@
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CustomerUpdateFormSchema } from '@/schemas/CustomerSchema';
+import { VehicleUpdateFormSchema } from '@/schemas/VehicleSchema';
 import { Text, Button, Spinner, FormContainer } from '@/components/ui';
 import { FormField } from '@/components';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateCustomer } from '@/services/customerService';
-import { CustomerUpdateForm } from '@/types/common';
-import { updateCustomerFields } from './data';
+import { updateVehicle } from '@/services/vehicleService';
+import { VehicleUpdateForm } from '@/types/common';
+import { updateVehicleFields } from './data';
 import { ControlledSelect } from '../../ControlledSelect/ControlledSelect';
 
-interface EditCustomerFormProps {
+interface EditVehicleFormProps {
   id: number;
-  defaultValues: CustomerUpdateForm;
+  defaultValues: VehicleUpdateForm;
   onClose: () => void;
 }
 
-export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFormProps) => {
+export const EditVehicleForm = ({ id, defaultValues, onClose }: EditVehicleFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (data: CustomerUpdateForm) => {
+    mutationFn: (data: VehicleUpdateForm) => {
       const { isActive, ...rest } = data;
       console.log(data);
       console.log(isActive);
       const newData = { ...rest, isActive: isActive === 'Activo' };
       console.log(newData);
-      return updateCustomer(id, newData);
+      return updateVehicle(id, newData);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['customers'], { refetchType: 'all' });
+      queryClient.invalidateQueries(['vehicles'], { refetchType: 'all' });
     },
   });
   const {
@@ -42,20 +42,20 @@ export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFor
     control,
     trigger,
     reset,
-  } = useForm<CustomerUpdateForm>({
-    resolver: zodResolver(CustomerUpdateFormSchema),
+  } = useForm<VehicleUpdateForm>({
+    resolver: zodResolver(VehicleUpdateFormSchema),
     defaultValues,
   });
-  const handleInputChange = async (field: keyof CustomerUpdateForm) => {
+  const handleInputChange = async (field: keyof VehicleUpdateForm) => {
     //con el "keyof" obtenemos auto completado cuando llamemos la función
     await trigger(field); //dispara la validación del campo
   };
 
-  const onSubmit: SubmitHandler<CustomerUpdateForm> = (data) => {
+  const onSubmit: SubmitHandler<VehicleUpdateForm> = (data) => {
     setIsLoading(true);
     mutation.mutate(data, {
       onSuccess: () => {
-        toast.success('Cliente actualizado exitosamente');
+        toast.success('Vehículo actualizado exitosamente');
         reset();
         setIsLoading(false);
         onClose();
@@ -75,10 +75,10 @@ export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFor
   return (
     <FormContainer className='m-auto mt-7 bg-gray-300'>
       <Text variant='title' className='text-center'>
-        Editar Cliente
+        Editar Vehículo
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {updateCustomerFields.map((field) => {
+        {updateVehicleFields.map((field) => {
           if (field.fieldType === 'select') {
             return (
               <ControlledSelect

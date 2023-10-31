@@ -9,14 +9,14 @@ import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { registerCustomer } from '@/services/customerService';
-import { CustomerFormSchemaType } from './types';
+import { NewCustomer } from '@/types/common';
 import { createCustomerFields } from './data';
 
 export const AddCustomerForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (data: CustomerFormSchemaType) => {
+    mutationFn: (data: NewCustomer) => {
       return registerCustomer(data);
     },
     onSuccess: () => {
@@ -35,13 +35,13 @@ export const AddCustomerForm = () => {
     formState: { errors },
     trigger,
     reset,
-  } = useForm<CustomerFormSchemaType>({ resolver: zodResolver(CustomerCreationSchema) });
-  const handleInputChange = async (field: keyof CustomerFormSchemaType) => {
+  } = useForm<NewCustomer>({ resolver: zodResolver(CustomerCreationSchema) });
+  const handleInputChange = async (field: keyof NewCustomer) => {
     //con el "keyof" obtenemos auto completado cuando llamemos la función
     await trigger(field); //dispara la validación del campo
   };
 
-  const onSubmit: SubmitHandler<CustomerFormSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<NewCustomer> = (data) => {
     setIsLoading(true);
     mutation.mutate(data, {
       onSuccess: () => {

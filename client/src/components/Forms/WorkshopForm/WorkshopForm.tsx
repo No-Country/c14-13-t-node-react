@@ -5,11 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Text, Button, Spinner, FormContainer } from '@/components/ui';
 import { FormField } from '@/components';
 import { toast } from 'sonner';
-import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useQuery } from '@tanstack/react-query';
 import { createWorkshopFields } from './data';
-import { WorkshopCreationSchemaType } from './types';
+import { NewWorkshop } from '@/types/common';
 import { WorkshopCreationSchema } from '@/schemas/WorkshopSchema';
 
 export const WorkshopForm = () => {
@@ -36,15 +34,15 @@ export const WorkshopForm = () => {
     trigger,
     control,
     reset,
-  } = useForm<WorkshopCreationSchemaType>({
+  } = useForm<NewWorkshop>({
     resolver: zodResolver(WorkshopCreationSchema),
   });
 
-  const handleInputChange = async (field: keyof WorkshopCreationSchemaType) => {
+  const handleInputChange = async (field: keyof NewWorkshop) => {
     await trigger(field);
   };
 
-  const onSubmit: SubmitHandler<WorkshopCreationSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<NewWorkshop> = (data) => {
     setIsLoading(true);
     // mutation.mutate(data, {
     //   onSuccess: () => {

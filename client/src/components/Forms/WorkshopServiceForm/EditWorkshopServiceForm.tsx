@@ -2,37 +2,43 @@
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CustomerUpdateFormSchema } from '@/schemas/CustomerSchema';
+import { WorkshopServiceUpdateFormSchema } from '@/schemas/WorkshopServicesSchema';
 import { Text, Button, Spinner, FormContainer } from '@/components/ui';
 import { FormField } from '@/components';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateCustomer } from '@/services/customerService';
-import { CustomerUpdateForm } from '@/types/common';
-import { updateCustomerFields } from './data';
+import { updateWorkshopService } from '@/services/workshopService';
+import { WorkshopServiceUpdateForm } from '@/types/common';
+import { updateWorkshopServiceFields } from './data';
 import { ControlledSelect } from '../../ControlledSelect/ControlledSelect';
 
-interface EditCustomerFormProps {
+interface EditWorkshopServiceFormProps {
   id: number;
-  defaultValues: CustomerUpdateForm;
+  defaultValues: WorkshopServiceUpdateForm;
   onClose: () => void;
 }
 
-export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFormProps) => {
+export const EditWorkshopServiceForm = ({
+  id,
+  defaultValues,
+  onClose,
+}: EditWorkshopServiceFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (data: CustomerUpdateForm) => {
-      const { isActive, ...rest } = data;
-      console.log(data);
-      console.log(isActive);
-      const newData = { ...rest, isActive: isActive === 'Activo' };
+    mutationFn: (data: WorkshopServiceUpdateForm) => {
+      const { isActive, servicePrice, ...rest } = data;
+      const newData = {
+        ...rest,
+        isActive: isActive === 'Activo',
+        servicePrice: Number(servicePrice),
+      };
       console.log(newData);
-      return updateCustomer(id, newData);
+      return updateWorkshopService(id, newData);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['customers'], { refetchType: 'all' });
+      queryClient.invalidateQueries(['services'], { refetchType: 'all' });
     },
   });
   const {
@@ -42,20 +48,20 @@ export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFor
     control,
     trigger,
     reset,
-  } = useForm<CustomerUpdateForm>({
-    resolver: zodResolver(CustomerUpdateFormSchema),
+  } = useForm<WorkshopServiceUpdateForm>({
+    resolver: zodResolver(WorkshopServiceUpdateFormSchema),
     defaultValues,
   });
-  const handleInputChange = async (field: keyof CustomerUpdateForm) => {
+  const handleInputChange = async (field: keyof WorkshopServiceUpdateForm) => {
     //con el "keyof" obtenemos auto completado cuando llamemos la función
     await trigger(field); //dispara la validación del campo
   };
 
-  const onSubmit: SubmitHandler<CustomerUpdateForm> = (data) => {
+  const onSubmit: SubmitHandler<WorkshopServiceUpdateForm> = (data) => {
     setIsLoading(true);
     mutation.mutate(data, {
       onSuccess: () => {
-        toast.success('Cliente actualizado exitosamente');
+        toast.success('Servicio actualizado exitosamente');
         reset();
         setIsLoading(false);
         onClose();
@@ -75,10 +81,10 @@ export const EditCustomerForm = ({ id, defaultValues, onClose }: EditCustomerFor
   return (
     <FormContainer className='m-auto mt-7 bg-gray-300'>
       <Text variant='title' className='text-center'>
-        Editar Cliente
+        Editar Servicio
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {updateCustomerFields.map((field) => {
+        {updateWorkshopServiceFields.map((field) => {
           if (field.fieldType === 'select') {
             return (
               <ControlledSelect
