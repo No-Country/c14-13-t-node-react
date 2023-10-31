@@ -25,13 +25,16 @@ export async function POST(request: Request) {
     const emailExists = await existingUserByEmail(email);
     if (emailExists) {
       return NextResponse.json(
-        { message: 'Ya existe un usuario con este email' },
+        { message: 'Ya existe un usuario con esas credenciales' },
         { status: 409 },
       );
     }
     const usernameExists = await existingUserByUsername(username);
     if (usernameExists) {
-      return NextResponse.json({ message: 'El nombre de usuario ya existe' }, { status: 409 });
+      return NextResponse.json(
+        { message: 'Ya existe un usuario con esas credenciales' },
+        { status: 409 },
+      );
     }
     const hashedPassword = await hash(password, 10);
     const newUser = await createUser({ email, username, password: hashedPassword });

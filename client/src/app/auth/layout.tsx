@@ -8,10 +8,10 @@ export default function AuthLayout({
 }) {
   return (
     <main className='flex min-h-[calc(100vh-3.5rem)] w-full overflow-hidden bg-white transition-colors duration-300 dark:bg-primary-background'>
-      <section className='hidden h-auto w-1/2 items-center justify-center bg-slate-400 md:flex'>
-        <div className='relative h-5/6 w-5/6'>
+      <section className='hidden h-auto w-1/2 items-center justify-center bg-slate-300/80 dark:bg-slate-900 md:flex'>
+        <div className='relative flex h-5/6 w-5/6 flex-col items-center'>
           <Image alt='Workshop' src='/images/car.svg' fill />
-          <Text variant='title' className='mt-4 text-center text-[3rem] text-orange-500'>
+          <Text variant='specialTitle' className='mt-1 text-center text-[3rem]'>
             GarageGuest
           </Text>
         </div>

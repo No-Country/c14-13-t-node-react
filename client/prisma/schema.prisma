@@ -63,31 +63,32 @@ model VerificationToken {
 }
 
 model Customer {
-  id       Int       @id @default(autoincrement())
-  dni      String    @unique
+  id        Int       @id @default(autoincrement())
+  dni       String    @unique
   firstName String    @map("first_name")
-  lastName String    @map("last_name")
-  email    String    @unique
-  phone    String
-  address  String
-  city     String
-  isActive Boolean   @default(true) @map("is_active")
-  vehicles Vehicle[]
+  lastName  String    @map("last_name")
+  email     String    @unique
+  phone     String
+  address   String
+  city      String
+  isActive  Boolean   @default(true) @map("is_active")
+  vehicles  Vehicle[]
 }
 
 model Vehicle {
   id          Int      @id @default(autoincrement())
-  plate       String
+  plate       String   @unique
   brand       String
   model       String
   comments    String?
   vehicleType String   @map("vehicle_type")
-  mileage     String?
+  mileage     String
   year        String
   color       String
   doors       String
+  isActive    Boolean  @default(true) @map("is_active")
   customerId  Int      @map("customer_id")
-  customer    Customer @relation(fields: [customerId], references: [id])
+  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   orders      Order[]
 }
 
@@ -110,11 +111,12 @@ model Order {
   workshopId    Int            @map("workshop_id")
   mechanicId    Int            @map("mechanic_id")
   vehicleId     Int            @map("vehicle_id")
-  employeeId    Int            @map("employess_id")
-  workshop      Workshop       @relation(fields: [workshopId], references: [id])
-  mechanic      Mechanic       @relation(fields: [mechanicId], references: [id])
-  vehicle       Vehicle        @relation(fields: [vehicleId], references: [id])
-  employess     Employee       @relation(fields: [employeeId], references: [id])
+  employeeId    Int            @map("employees_id")
+  workshop      Workshop       @relation(fields: [workshopId], references: [id], onDelete: Cascade)
+  mechanic      Mechanic       @relation(fields: [mechanicId], references: [id], onDelete: Cascade)
+  vehicle       Vehicle        @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  employees     Employee       @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  status        Status         @default(pending)
   orderServices OrderService[]
 }
 
@@ -143,7 +145,7 @@ model OrderService {
   id        Int     @id @default(autoincrement())
   orderId   Int     @map("order_id")
   serviceId Int     @map("service_id")
-  order     Order   @relation(fields: [orderId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   service   Service @relation(fields: [serviceId], references: [id])
 }
 
@@ -162,4 +164,10 @@ enum RoleType {
   guest
   user
   admin
+}
+
+enum Status {
+  pending
+  inProgress
+  finished
 }

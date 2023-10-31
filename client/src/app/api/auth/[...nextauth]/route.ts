@@ -20,6 +20,13 @@ export const authOptions: NextAuthOptions = {
   },
   secret: envServer.NEXTAUTH_SECRET,
   callbacks: {
+    // redirect: (url: string, baseUrl: string) => {
+    //   // Allows relative callback URLs
+    //   if (url.startsWith('/')) return `${baseUrl}${url}`;
+    //   // Allows callback URLs on the same origin
+    //   else if (new URL(url).origin === baseUrl) return url;
+    //   return baseUrl;
+    // },
     jwt: async ({ token, user }) => {
       //esto permite añadir datos del user en el jwt y usarlo en el session callback
       if (user) {
@@ -62,7 +69,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
         const existingUser = await existingUserByEmail(credentials.email);
         if (!existingUser) {
-          throw new Error('No existe un usuario con ese email');
+          throw new Error('Error en los datos de inicio de sesión');
         }
         if (!existingUser.password) {
           //Si el usuario existe y no tiene contraseña es porque utilizo un proveedor externo

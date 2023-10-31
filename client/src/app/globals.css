@@ -4,6 +4,16 @@
 
 @layer base {
   :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+
+    --ring: 215 20.2% 65.1%;
+
+    --radius: 0.5rem;
+
     --foreground-rgb: 0, 0, 0;
     --background-start-rgb: 214, 219, 220;
     --background-end-rgb: 255, 255, 255;
@@ -19,12 +29,17 @@
 
     --radix-dropdown-menu-content-transform-origin: 40% 0;
   }
-  .DropdownMenuContent {
-    transform-origin: 40% 0 !important;
-    /* animation: scaleIn 0.5s ease-out; */
-    /* background-color: brown; */
-  }
   .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+
+    --ring: 216 34% 17%;
+
+    --radius: 0.5rem;
+
     --muted: 223 47% 11%;
     --muted-foreground: 215.4 16.3% 56.9%;
 
@@ -33,6 +48,9 @@
 
     --popover: 224 71% 4%;
     --popover-foreground: 215 20.2% 65.1%;
+  }
+  .dark span.apexcharts-legend-text {
+    color: rgba(255, 255, 255, 0.91) !important;
   }
 }
 
@@ -43,9 +61,27 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+/* WebKit (Safari and Chrome) */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 60%);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 26%);
+}
 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
+}
+
+body[style] {
+  margin: 0 auto !important;
+  overflow-y: auto !important;
 }

@@ -7,7 +7,8 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
 import { Text, Button, Spinner } from '@/components/ui';
-import { FormField, type FieldList } from '@/components';
+import { FormField } from '@/components';
+import { TextFieldItem } from '@/types/formTypes';
 import { SignUpSchema } from '@/schemas/AuthSchema';
 import { registerUser } from '@/services/userService';
 import OautButtons from '../oauth-buttons/OautButtons';
@@ -81,7 +82,7 @@ export const SignUpForm = () => {
     );
   };
 
-  const signUpFields: FieldList<SignUpSchemaType> = [
+  const signUpFields: TextFieldItem<SignUpSchemaType>[] = [
     {
       label: 'Nombre de Usuario',
       id: 'username',
@@ -125,7 +126,7 @@ export const SignUpForm = () => {
       <OautButtons />
       <p className='pb-6 text-center text-black dark:text-white'>
         ¿Ya tienes una cuenta?{' '}
-        <Link href='/auth/sign-in' className='text-blue-600'>
+        <Link href='/auth/sign-in' className='text-blue-600 hover:text-blue-400'>
           Inicia Sesión
         </Link>{' '}
       </p>

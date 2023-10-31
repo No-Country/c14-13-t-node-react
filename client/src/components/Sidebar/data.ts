@@ -1,7 +1,19 @@
-import { HomeIcon, Users, Car, type LucideIcon } from 'lucide-react';
+import {
+  HomeIcon,
+  Users,
+  Car,
+  type LucideIcon,
+  Store,
+  Briefcase,
+  FileText,
+  HardHat,
+  Wrench,
+  User,
+} from 'lucide-react';
 type AccordionItem = {
   Icon: LucideIcon;
   title: string;
+  adminOnly?: boolean;
   routes: route[];
 };
 type route = {
@@ -15,7 +27,7 @@ export const sidebarData: AccordionItem[] = [
     title: 'Dashboard',
     routes: [
       {
-        name: 'Dashboard',
+        name: 'Resumen General',
         path: '/dashboard',
       },
     ],
@@ -26,64 +38,87 @@ export const sidebarData: AccordionItem[] = [
     routes: [
       {
         name: 'Añadir Cliente',
-        path: '/dashboard/add-customer',
+        path: '/dashboard/customers/add-customer',
       },
       {
         name: 'Lista de Clientes',
-        path: '/dashboard/customers-list',
-      },
-      {
-        name: 'Detalles de Cliente',
-        path: '/dashboard/customer',
+        path: '/dashboard/customers/customers-list',
       },
     ],
-  },
-  {
-    Icon: Users,
-    title: 'Empleados',
-    routes: [
-      {
-        name: 'Añadir Empleado',
-        path: '/dashboard/add-customer',
-      },
-      {
-        name: 'Actualizar Empleado',
-        path: '/dashboard/update-customer',
-      },
-      {
-        name: 'Borrar Empleado',
-        path: '/dashboard/delete-customer',
-      },
-      {
-        name: 'Lista de Empleados',
-        path: '/dashboard/customers-list',
-      },
-    ],
-  },
-  {
-    Icon: Users,
-    title: 'Usuarios',
-    routes: [{ name: 'Lista de usuarios', path: '/dashboard/users-list', adminOnly: true }],
   },
   {
     Icon: Car,
     title: 'Vehículos',
     routes: [
       {
-        name: 'Añadir Vehículo',
-        path: '/dashboard/add-customer',
-      },
-      {
-        name: 'Actualizar Vehículo',
-        path: '/dashboard/update-customer',
-      },
-      {
-        name: 'Borrar Vehículo',
-        path: '/dashboard/delete-customer',
-      },
-      {
         name: 'Lista de Vehículos',
-        path: '/dashboard/customers-list',
+        path: '/dashboard/vehicles/vehicles-list',
+      },
+    ],
+  },
+  {
+    Icon: FileText,
+    title: 'Ordenes',
+    routes: [
+      {
+        name: 'Lista de Ordenes',
+        path: '/dashboard/orders/orders-list',
+      },
+    ],
+  },
+  {
+    Icon: Wrench,
+    title: 'Servicios',
+    routes: [
+      { name: 'Añadir servicios', path: '/dashboard/services/add-service' },
+      { name: 'Lista de servicios', path: '/dashboard/services/services-list' },
+    ],
+  },
+  {
+    Icon: HardHat,
+    title: 'Mecánicos',
+    routes: [
+      {
+        name: 'Añadir Mecánico',
+        path: '/dashboard/mechanics/add-mechanic',
+      },
+      {
+        name: 'Lista de Mecánicos',
+        path: '/dashboard/mechanics/mechanics-list',
+      },
+    ],
+  },
+  {
+    Icon: Briefcase,
+    title: 'Empleados',
+    routes: [
+      {
+        name: 'Añadir Empleado',
+        path: '/dashboard/employees/add-employee',
+      },
+      {
+        name: 'Lista de Empleados',
+        path: '/dashboard/employees/employees-list',
+      },
+    ],
+  },
+  {
+    Icon: User,
+    title: 'Usuarios',
+    adminOnly: true,
+    routes: [
+      { name: 'Lista de usuarios', path: '/dashboard/users/users-list', adminOnly: true },
+    ],
+  },
+  {
+    Icon: Store,
+    title: 'Taller',
+    adminOnly: true,
+    routes: [
+      {
+        name: 'Datos del Taller',
+        path: '/dashboard/workshop',
+        adminOnly: true,
       },
     ],
   },

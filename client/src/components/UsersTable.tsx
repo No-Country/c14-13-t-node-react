@@ -3,55 +3,68 @@ import React from 'react';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
+  Text,
 } from '@/components/ui';
 import { useQuery } from '@tanstack/react-query';
 import { getUsers } from '@/services/userService';
-import StatusChip from './StatusChip';
-export const UsersTable = () => {
+import { StatusChip } from './StatusChip';
+import { ActionsButtons } from './ActionsButtons';
+import { TableContainer } from './TableContainer';
+
+export const UsersTable = ({ children }: { children: React.ReactNode }) => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['users'],
     queryFn: getUsers,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <>{children}</>;
   if (isError) return <div>Error: {String(error)}</div>;
-  console.log(data);
   return (
-    <>
-      <div className='mb-4 text-slate-800 dark:text-white'>Lista de Usuarios</div>
+    <TableContainer>
+      <Text variant='title' className='mb-4 text-center text-slate-800 dark:text-white'>
+        Lista de Usuarios
+      </Text>
       <Table>
-        <TableCaption>Lista de Usuarios</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>ID</TableHead>
             <TableHead>Nombre</TableHead>
             <TableHead>Correo Electrónico</TableHead>
             <TableHead>Estatus</TableHead>
             <TableHead>Rol</TableHead>
-            <TableHead className='text-right'>Acciones</TableHead>
+            <TableHead className='text-center'>Acciones</TableHead>
           </TableRow>
         </TableHeader>
-
         <TableBody>
           {data.users.map(({ name, username, id, isActivated, email, role }) => (
             <TableRow key={name ?? username}>
-              <TableCell>{id}</TableCell>
-              <TableCell className='font-medium'>{name ?? username}</TableCell>
+              <TableCell>{name ?? username}</TableCell>
               <TableCell>{email}</TableCell>
               <TableCell>
                 <StatusChip isActive={isActivated} />
               </TableCell>
-              <TableCell>{role === 'user' ? 'Usuario' : 'Administrador'}</TableCell>
-              <TableCell className='text-right'>Ver - Borrar</TableCell>
+              <TableCell>
+                {role === 'user' || role === 'guest' ? 'Usuario' : 'Administrador'}
+              </TableCell>
+              <TableCell className='flex items-center justify-center'>
+                <ActionsButtons
+                  deleteFunction={() =>
+                    console.log(id) as unknown as Promise<Record<string, unknown>>
+                  }
+                  deleteDescription={`Esta seguro que desea borrar al Usuario ${
+                    name ?? username
+                  }`}
+                  id={id}
+                  category='users'
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </>
+    </TableContainer>
   );
 };

@@ -1,7 +1,9 @@
-import { getServerAuthSession } from '@/utils/auth';
+import { StatisticsBoard } from '@/components/StatisticsBoard/StatisticsBoard';
 
 export default function page() {
-  // const session = await getServerAuthSession();
-  // console.log(session);
-  return <div className='text-slate-800 dark:text-white'>dashboard</div>;
+  return (
+    <div className='h-full w-full text-slate-800 dark:text-white'>
+      <StatisticsBoard />
+    </div>
+  );
 }
