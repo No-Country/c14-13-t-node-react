@@ -1,5 +1,5 @@
 import { prisma } from '@/server/db';
-import type { NewWorkshopService } from '@/types/common';
+import type { NewWorkshopService, WorkshopServiceUpdate } from '@/types/common';
 
 export const getAllWorkshopServices = async () => {
   return await prisma?.service.findMany();
@@ -16,7 +16,7 @@ export const createWorkshopService = async (workshopServiceData: NewWorkshopServ
 
 export const updateWorkshopService = async (
   id: number,
-  workshopServiceData: NewWorkshopService,
+  workshopServiceData: WorkshopServiceUpdate,
 ) => {
   return await prisma.service.update({ where: { id }, data: workshopServiceData });
 };

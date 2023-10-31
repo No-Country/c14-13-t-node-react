@@ -1,4 +1,4 @@
-import type { Employee, NewEmployee } from '@/types/common';
+import type { Employee, NewEmployee, EmployeeUpdate } from '@/types/common';
 import { axiosClient } from './AxiosClient';
 
 export const createEmployee = async (employeeData: NewEmployee) => {
@@ -13,5 +13,15 @@ export const getEmployees = async () => {
 
 export const deleteEmployee = async (employeeId: number) => {
   const result = await axiosClient.delete<{ employee: Employee }>(`/employees/${employeeId}`);
+  return result.data;
+};
+
+export const getEmployeeById = async (employeeId: number) => {
+  const result = await axiosClient.get<Employee>(`/employees/${employeeId}`);
+  return result.data;
+};
+
+export const updateEmployee = async (id: number, employeeData: EmployeeUpdate) => {
+  const result = await axiosClient.patch<Employee>(`/employees/${id}`, employeeData);
   return result.data;
 };

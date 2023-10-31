@@ -1,4 +1,4 @@
-import type { Mechanic, NewMechanic } from '@/types/common';
+import type { Mechanic, NewMechanic, MechanicUpdate } from '@/types/common';
 import { axiosClient } from './AxiosClient';
 
 export const createMechanic = async (mechanicData: NewMechanic) => {
@@ -13,5 +13,15 @@ export const getMechanics = async () => {
 
 export const deleteMechanic = async (mechanicId: number) => {
   const result = await axiosClient.delete<{ mechanic: Mechanic }>(`/mechanics/${mechanicId}`);
+  return result.data;
+};
+
+export const getMechanicById = async (mechanicId: number) => {
+  const result = await axiosClient.get<Mechanic>(`/mechanics/${mechanicId}`);
+  return result.data;
+};
+
+export const updateMechanic = async (id: number, mechanicData: MechanicUpdate) => {
+  const result = await axiosClient.patch<Mechanic>(`/mechanics/${id}`, mechanicData);
   return result.data;
 };

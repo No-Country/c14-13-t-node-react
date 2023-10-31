@@ -1,5 +1,5 @@
 import { prisma } from '@/server/db';
-import type { NewEmployee } from '@/types/common';
+import type { NewEmployee, EmployeeUpdate } from '@/types/common';
 
 export const getAllEmployees = async () => {
   return await prisma?.employee.findMany();
@@ -19,7 +19,7 @@ export const createEmployee = async (employeeData: NewEmployee) => {
   return await prisma.employee.create({ data: employeeData });
 };
 
-export const updateEmployee = async (id: number, employeeData: NewEmployee) => {
+export const updateEmployee = async (id: number, employeeData: EmployeeUpdate) => {
   return await prisma.employee.update({ where: { id }, data: employeeData });
 };
 
