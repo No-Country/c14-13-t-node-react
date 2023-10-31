@@ -29,7 +29,9 @@ export const CustomersOrders = ({ orders }: CustomersOrdersProps) => {
   if (orders.length === 0) {
     return (
       <div className='flex h-full w-full items-center justify-center'>
-        <div>Este cliente no tiene ordenes</div>
+        <Text variant='modalTitle' className='text-xl'>
+          Este cliente no tiene ordenes
+        </Text>
       </div>
     );
   }

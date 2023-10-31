@@ -33,7 +33,7 @@ export const WorkshopServicesTable = ({ children }: { children: React.ReactNode 
   if (data.workshopServices.length === 0) {
     return (
       <div className='flex h-full w-full items-center justify-center'>
-        <div>No hay Vehículos para mostrar</div>
+        <div>No hay Servicios para mostrar</div>
       </div>
     );
   }
@@ -51,7 +51,7 @@ export const WorkshopServicesTable = ({ children }: { children: React.ReactNode 
         <TableHeader>
           <TableRow>
             <TableHead>Código</TableHead>
-            <TableHead>Servicio</TableHead>
+            <TableHead>Nombre</TableHead>
             <TableHead>Descripción</TableHead>
             <TableHead>Precio</TableHead>
             <TableHead>Estatus</TableHead>

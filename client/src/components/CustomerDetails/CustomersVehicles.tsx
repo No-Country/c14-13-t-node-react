@@ -29,7 +29,9 @@ export const CustomersVehicles = ({ vehicles }: VehiclesVehiclesProps) => {
   if (vehicles.length === 0) {
     return (
       <div className='flex h-full w-full items-center justify-center'>
-        <div>Este cliente no posee vehículos</div>
+        <Text variant='modalTitle' className='text-xl'>
+          Este cliente no posee vehículos
+        </Text>
       </div>
     );
   }

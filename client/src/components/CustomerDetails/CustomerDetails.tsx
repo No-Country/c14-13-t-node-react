@@ -95,7 +95,8 @@ export const ClientDetails = ({ id }: { id: number }) => {
       <div className='flex w-full flex-col items-center space-y-10'>
         <div className='flex gap-6'>
           {pestañas.map((tab, index) => (
-            <span
+            <button
+              type='button'
               key={index + tab.name}
               onClick={() => setPestaña(tab.name)}
               className={cn(
@@ -104,7 +105,7 @@ export const ClientDetails = ({ id }: { id: number }) => {
               )}
             >
               {tab.label}
-            </span>
+            </button>
           ))}
         </div>
         <span key={pestaña} className='flex w-full animate-fadeIn justify-center'>
