@@ -42,17 +42,3 @@ export async function DELETE(request: Request, { params }: any) {
 
   return NextResponse.json(vehicle, { status: 200 });
 }
-
-// import { getVehiclesById, updateVehicles, removeVehicle} from '@/server/services/vehicles';
-// import { handleCommonError } from '@/server/errorHandlers';
-// import { VehicleCreationSchema as NewVehicleSchema } from '@/schemas/VehicleSchema';
-
-// export async function DELETE(request: Request) {
-//     try {
-//       const vehiclePlate = await request.json();
-//       const
-//       await removeVehicle.delete(plate)
-//     } catch (error) {
-
-//     }
-//   }
