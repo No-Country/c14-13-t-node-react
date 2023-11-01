@@ -3,7 +3,9 @@ import { cva } from 'class-variance-authority';
 export const textVariants = cva('', {
   variants: {
     variant: {
-      title: 'text-2xl font-bold text-gray-900 dark:text-gray-200',
+      title: 'text-2xl font-bold text-gray-900 dark:text-gray-200 ',
+      homeTitle:
+        ' mb-2 text-3xl text-[1.8rem] font-bold text-gray-900 dark:text-gray-200 lg:text-[2.2rem]',
       body: 'text-base font-normal text-gray-900 dark:text-gray-200',
       button: 'text-base font-semibold text-black',
       detailsTitle: 'text-lg font-semibold text-gray-900 dark:text-gray-200',

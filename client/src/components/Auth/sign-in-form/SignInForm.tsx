@@ -9,7 +9,7 @@ import { FormField } from '@/components';
 import { TextFieldItem } from '@/types/formTypes';
 import { toast } from 'sonner';
 import Link from 'next/link';
-import OautButtons from '../oauth-buttons/OautButtons';
+import OauthButtons from '../oauth-buttons/OauthButtons';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -75,10 +75,13 @@ export const SignInForm = () => {
         </Button>
       </form>
 
-      <OautButtons />
+      <OauthButtons />
       <p className='pb-6 text-center text-black dark:text-white'>
         ¿No tienes una cuenta?{' '}
-        <Link href='/auth/sign-up' className='text-blue-600 hover:text-blue-400'>
+        <Link
+          href='/auth/sign-up'
+          className='text-primary-darkBlue hover:text-primary-lightBlue dark:text-primary-lighterBlue dark:hover:text-primary-lightBlue'
+        >
           Regístrate
         </Link>{' '}
       </p>

@@ -52,7 +52,7 @@ export const WorkshopServicesTable = ({ children }: { children: React.ReactNode 
           <TableRow>
             <TableHead>Código</TableHead>
             <TableHead>Nombre</TableHead>
-            <TableHead>Descripción</TableHead>
+            <TableHead className='min-w-[10rem]'>Descripción</TableHead>
             <TableHead>Precio</TableHead>
             <TableHead>Estatus</TableHead>
             <TableHead className='text-center'>Acciones</TableHead>

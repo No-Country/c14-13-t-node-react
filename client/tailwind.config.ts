@@ -14,6 +14,9 @@ const config: Config = {
         primary: {
           background: 'hsl(230, 17%, 14%)',
           lightBackground: 'hsl(232, 19%, 19%)',
+          lightBlue: 'hsl(var(--light-blue))',
+          darkBlue: 'hsl(var(--dark-blue))',
+          lighterBlue: 'hsl(var(--lighter-blue))',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
