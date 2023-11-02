@@ -9,7 +9,7 @@
 </p>
 
 
-_Es una App Web de Gestion de Taller de Repparacion Automotriz, que esta diseñada mantener un control adecuado de cada aspecto, desde la atención al cliente hasta la reparación de vehículos_
+_Es una App Web de Gestión de Taller de Reparación Automotriz, que esta diseñada mantener un control adecuado de cada aspecto, desde la atención al cliente hasta la reparación de vehículos_
 
 <p align="center">
 
@@ -65,10 +65,13 @@ _Si quiere ver este proyecto, esta Desplegado en este_ [Link](https://garage-gue
 
 ## Construido con 🛠️
 
-_Algunas de las Tecnologias y herramientas utilizadas para este proyecto_
+_Algunas de las Tecnologías, herramientas y servicios utilizados para este proyecto_
 
 * [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 * [Next Js](https://nextjs.org/docs/getting-started/installation) - El framework web usado
+* [Tailwind CSS](https://tailwindcss.com/docs/installation) - El framework de CSS para darle estilos a Garage Guest.
+* [React Hook Form](https://react-hook-form.com/get-started) - Librería para generar formularios.
+* [React Query](https://tanstack.com/query/v4/docs/react/overview) - Librería para manejo de llamadas API y cache. 
 * [npm](https://www.npmjs.com/) - Manejador de dependencias
 * [PostgresSQL](https://www.postgresql.org/docs/) - Usado como motor de base de Datos
 * [Prisma](https://www.prisma.io/docs/getting-started/quickstart) - Usado como ORM
@@ -78,7 +81,7 @@ _Algunas de las Tecnologias y herramientas utilizadas para este proyecto_
 _Los Autores de este Proyecto:_
 
 * **Carolina Cirillo** - *PM | QA tester* - [CarolinaCirillo](https://github.com/CarolinaCirillo)
-* **Vladimir Infante** - *Frontend Developer | UA/UX* - [InfVlad](https://github.com/InfVlad)
+* **Vladimir Infante** - *Fullstack Developer* - [InfVlad](https://github.com/InfVlad)
 * **Radhames Capellan** - *Backend Developer* - [radhamesc-capellan](https://github.com/radhamesc-capellan)
 
 ## Licencia 📄
@@ -89,6 +92,6 @@ Este proyecto está bajo la Licencia (Autores Ante) - mira el archivo [LICENSE.m
 ## Expresiones de Gratitud 🎁
 
 * Si te gustó el proyecto, Una ⭐ y comenta con tus Amigos 📢
-* Si te sirvó en algo, Nos Alegra 😉! - Invita una cerveza 🍺 o un café ☕ a alguien del equipo.
+* Si te sirvió en algo, Nos Alegra 😉! - Invita una cerveza 🍺 o un café ☕ a alguien del equipo.
 * Agradecemos a todos aquellos que Colaboraron y Ayudaron con el Proyecto 🤓.
 
