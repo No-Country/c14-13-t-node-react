@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react';
 import { Text, Button } from '@/components/ui';
 import { getBaseUrl } from '@/utils/getUrl';
 
-const OautButtons = () => {
+const OauthButtons = () => {
   const baseUrl = getBaseUrl();
   return (
     <div className='pb-6'>
@@ -42,4 +42,4 @@ const OautButtons = () => {
   );
 };
 
-export default OautButtons;
+export default OauthButtons;

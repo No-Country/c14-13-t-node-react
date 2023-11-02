@@ -26,7 +26,7 @@ export const updateUser = async <T>(userData: T) => {
   return response.data;
 };
 
-export const deleteUser = async (userId: number) => {
+export const deleteUser = async (userId: string) => {
   const response = await axiosClient.delete(`/users/${userId}`);
   return response.data;
 };

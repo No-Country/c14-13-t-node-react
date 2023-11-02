@@ -10,7 +10,7 @@ import {
   Text,
 } from '@/components/ui';
 import { useQuery } from '@tanstack/react-query';
-import { getUsers } from '@/services/userService';
+import { getUsers, deleteUser } from '@/services/userService';
 import { StatusChip } from './StatusChip';
 import { ActionsButtons } from './ActionsButtons';
 import { TableContainer } from './TableContainer';
@@ -51,9 +51,8 @@ export const UsersTable = ({ children }: { children: React.ReactNode }) => {
               </TableCell>
               <TableCell className='flex items-center justify-center'>
                 <ActionsButtons
-                  deleteFunction={() =>
-                    console.log(id) as unknown as Promise<Record<string, unknown>>
-                  }
+                  onlyDelete
+                  deleteFunction={deleteUser}
                   deleteDescription={`Esta seguro que desea borrar al Usuario ${
                     name ?? username
                   }`}

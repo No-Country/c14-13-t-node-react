@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getAllOrders, createOrder } from '@/server/services/orders';
+import { getAllOrders, createOrder, getOrders } from '@/server/services/orders';
 import { handleCommonError } from '@/server/errorHandlers';
 import { OrderCreationSchema as NewOrderSchema } from '@/schemas/OrderSchema';
 
 export async function GET(request: Request) {
   try {
-    const orders = await getAllOrders();
-    return NextResponse.json({ orders }, { status: 200 });
+    const orders = await getOrders();
+    return NextResponse.json(orders, { status: 200 });
   } catch (error) {
     return handleCommonError(error);
   }

@@ -11,7 +11,7 @@ import { FormField } from '@/components';
 import { TextFieldItem } from '@/types/formTypes';
 import { SignUpSchema } from '@/schemas/AuthSchema';
 import { registerUser } from '@/services/userService';
-import OautButtons from '../oauth-buttons/OautButtons';
+import OauthButtons from '../oauth-buttons/OauthButtons';
 import { signIn } from 'next-auth/react';
 import { AxiosError } from 'axios';
 
@@ -123,10 +123,13 @@ export const SignUpForm = () => {
           {isLoading ? <Spinner /> : 'Aceptar'}
         </Button>
       </form>
-      <OautButtons />
+      <OauthButtons />
       <p className='pb-6 text-center text-black dark:text-white'>
         ¿Ya tienes una cuenta?{' '}
-        <Link href='/auth/sign-in' className='text-blue-600 hover:text-blue-400'>
+        <Link
+          href='/auth/sign-in'
+          className='text-primary-darkBlue hover:text-primary-lightBlue dark:text-primary-lighterBlue dark:hover:text-primary-lightBlue'
+        >
           Inicia Sesión
         </Link>{' '}
       </p>

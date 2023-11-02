@@ -1,13 +1,13 @@
 import React from 'react';
-import { CustomersTable } from '@/components/CustomersTable';
+import { OrdersTable } from '@/components/Tables';
 import { TableSkeleton } from '@/components/TableSkeleton';
 
 export default function page() {
   return (
     <>
-      <CustomersTable>
+      <OrdersTable>
         <TableSkeleton />
-      </CustomersTable>
+      </OrdersTable>
     </>
   );
 }

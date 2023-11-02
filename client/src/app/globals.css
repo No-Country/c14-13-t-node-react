@@ -14,6 +14,10 @@
 
     --radius: 0.5rem;
 
+    --light-blue: 238, 85%, 66%;
+    --lighter-blue: 238, 85%, 76%;
+    --dark-blue: 238, 85%, 56%;
+
     --foreground-rgb: 0, 0, 0;
     --background-start-rgb: 214, 219, 220;
     --background-end-rgb: 255, 255, 255;

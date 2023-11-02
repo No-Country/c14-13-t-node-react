@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 import { ThemeProvider, QueryProvider, NextAuthProvider } from './_Providers';
 import { Inter, Abril_Fatface } from 'next/font/google';
 import { Toaster } from 'sonner';
-import { Navbar } from '@/components/Navbar';
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(() => import('../components/Navbar'));
 
 const inter = Inter({
   subsets: ['latin'],

@@ -32,7 +32,7 @@ export const ThemeToggle = () => {
     <button
       title='Theme toggle'
       aria-label='Theme toggle'
-      className='relative h-7 w-7 rounded-full p-1 ring-1 ring-slate-900/40 transition-all duration-300 ease-in-out dark:ring-slate-200/50'
+      className='relative h-7 w-7 rounded-full bg-white p-1 ring-1 ring-slate-900/40 transition-all duration-300 ease-in-out dark:bg-primary-lightBackground dark:ring-slate-200/50'
       onClick={handleThemeToggle}
     >
       {!!icon && (

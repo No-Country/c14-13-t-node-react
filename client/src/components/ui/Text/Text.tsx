@@ -17,6 +17,8 @@ const createText = (variant: TextProps['variant']) => {
       return 'span';
     case 'title':
       return 'h1';
+    case 'homeTitle':
+      return 'h2';
     case 'detailsTitle':
       return 'h2';
     case 'detailsLabel':
