@@ -29,4 +29,5 @@ GOOGLE_CLIENT_SECRET
 Abrir [http://localhost:3000](http://localhost:3000) con su navegador.
 
 
+[garage_guest.webm](https://github.com/No-Country/c14-13-t-node-react/assets/85122601/733eaf88-e5be-436d-ad63-1d1562917a20)
 
