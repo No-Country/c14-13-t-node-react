@@ -11,7 +11,7 @@ export const getEmployeeById = async (id: number) => {
 };
 
 export const getEmployeeByDni = async (DNI: string) => {
-  const employee = await prisma.employee.findFirst({ where: { dni: DNI } });
+  const employee = await prisma.employee.findUnique({ where: { dni: DNI } });
   return employee;
 };
 

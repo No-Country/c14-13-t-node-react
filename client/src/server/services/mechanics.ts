@@ -11,7 +11,7 @@ export const getMechanicById = async (id:number) => {
 }
 
 export const getMechanicByDni = async (DNI:string) => {
-  const mechanic = await prisma.mechanic.findFirst({where: {dni : DNI}})
+  const mechanic = await prisma.mechanic.findMany({where: {dni : DNI}})
   return mechanic;
 }
 

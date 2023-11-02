@@ -1,11 +1,15 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { handleCommonError } from '@/server/errorHandlers';
 import { getMechanicByDni } from '@/server/services/mechanics';
 
 
-export async function GET(request: Request, { params }: { params: { dni: string } }) {
+export async function GET(req:NextRequest) {
+  const url = new URL (req.url)
+  const dni = url.searchParams.get('dni')
+
+  if (dni) {
     try {
-      const mechanic = await getMechanicByDni(params.dni);
+      const mechanic = await getMechanicByDni(dni);
       if (!mechanic) {
         return NextResponse.json(
           {
@@ -20,4 +24,13 @@ export async function GET(request: Request, { params }: { params: { dni: string 
     } catch (error) {
       return handleCommonError(error);
     }
+  }
+  return NextResponse.json({
+    message: 'Into Valid Parameter (dni)',
+  },
+  {
+    status: 400,
+  })
+
+    
   }
