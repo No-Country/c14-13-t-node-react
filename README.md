@@ -30,6 +30,3 @@ Abrir [http://localhost:3000](http://localhost:3000) con su navegador.
 
 
 
-https://github.com/No-Country/c14-13-t-node-react/assets/85122601/0fba46b4-7da0-4322-b303-fa20f7016ab7
-
-
