@@ -6,14 +6,14 @@ export const getAllOrders = async () => {
   return await prisma?.order.findMany();
 };
 
-export const createOrder = async (orderData: NewOrder) => {
-  const status = convertStatusFromZod(orderData.status);
-  return await prisma.order.create({ data: { ...orderData, status } });
-};
-
 export const getOrderById = async (id: number) => {
   const order = await prisma.order.findFirst({ where: { id } });
   return order;
+};
+
+export const createOrder = async (orderData: NewOrder) => {
+  const status = convertStatusFromZod(orderData.status);
+  return await prisma.order.create({ data: { ...orderData, status } });
 };
 
 export const updateOrder = async (id: number, orderData: NewOrder) => {

@@ -53,7 +53,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     if (!workshopService) {
       return NextResponse.json(
         {
-          message: 'No Service Delete',
+          message: 'No se pudo encontrar el servicio',
         },
         {
           status: 404,
@@ -63,7 +63,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     return NextResponse.json(
       {
         workshopService,
-        message: 'Succefull Delete',
+        message: 'Servicio borrado exitosamente',
       },
       { status: 200 },
     );
