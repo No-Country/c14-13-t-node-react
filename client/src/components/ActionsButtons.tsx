@@ -5,11 +5,14 @@ import { useModal } from '@/hooks/useModal';
 import { ActionBase } from '@/types/common';
 import { DeleteModal } from './DeleteModal';
 
-interface ActionsButtonsProps<T extends string | number> extends ActionBase<T> {}
+interface ActionsButtonsProps<T extends string | number> extends ActionBase<T> {
+  onlyDelete?: boolean;
+}
 
 export const ActionsButtons = <T extends string | number>({
   id,
   category,
+  onlyDelete,
   deleteDescription,
   deleteFunction,
 }: ActionsButtonsProps<T>) => {
@@ -28,13 +31,15 @@ export const ActionsButtons = <T extends string | number>({
   };
   return (
     <div className='flex items-center gap-3'>
-      <Link
-        href={`/dashboard/${category}/${id}`}
-        className='rounded-lg bg-green-600 p-[3px] text-white'
-        title='Ver'
-      >
-        <Eye size={20} />
-      </Link>
+      {!onlyDelete && (
+        <Link
+          href={`/dashboard/${category}/${id}`}
+          className='rounded-lg bg-green-600 p-[3px] text-white'
+          title='Ver'
+        >
+          <Eye size={20} />
+        </Link>
+      )}
       <button
         onClick={handleDelete}
         className='rounded-lg bg-red-600 p-[3px] text-white'

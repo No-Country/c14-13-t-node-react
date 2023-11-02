@@ -25,3 +25,65 @@ export const removeOrder = async (id: number) => {
   const deleteOrder = await prisma.order.delete({ where: { id } });
   return deleteOrder;
 };
+
+/**
+ * Solo los datos que realmente necesito mostrar en la tabla de ordenes
+ */
+export const getOrders = async () => {
+  const orders = await prisma.order.findMany({
+    orderBy: {
+      id: 'desc',
+    },
+    select: {
+      id: true,
+      entryDate: true,
+      departureDate: true,
+      deadline: true,
+      cost: true,
+      workshopId: true,
+      mechanicId: true,
+      vehicleId: true,
+      employeeId: true,
+      vehicle: {
+        select: {
+          plate: true,
+          customer: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+            },
+          },
+        },
+      },
+      orderServices: {
+        select: {
+          serviceId: true,
+          service: {
+            select: {
+              serviceCode: true,
+              service: true,
+            },
+          },
+        },
+      },
+      workshop: {
+        select: {
+          name: true,
+        },
+      },
+      employees: {
+        select: {
+          name: true,
+        },
+      },
+      mechanic: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
+  return orders;
+};

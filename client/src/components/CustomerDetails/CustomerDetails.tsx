@@ -12,7 +12,7 @@ import { Spinner } from '../ui';
 import { Resumen } from './Resumen';
 import { EditCustomerForm } from '../Forms/CustomerForms/EditCustomerForm';
 
-type Tabs = 'resumen' | 'vehiculos' | 'ordenes';
+type Tabs = 'resumen' | 'vehiculos';
 
 const temporal = () => (
   <div className='flex w-full flex-col items-center'>Tablas de vehiculos y ordenes</div>
@@ -21,13 +21,11 @@ const temporal = () => (
 type Views = {
   resumen: typeof Resumen;
   vehiculos: typeof VehicleForm;
-  ordenes: typeof temporal;
 };
 
 const views: Views = {
   resumen: Resumen,
   vehiculos: VehicleForm,
-  ordenes: temporal,
 };
 
 export const ClientDetails = ({ id }: { id: number }) => {
@@ -72,10 +70,6 @@ export const ClientDetails = ({ id }: { id: number }) => {
       name: 'vehiculos',
       label: 'Agregar Vehículo',
     },
-    {
-      name: 'ordenes',
-      label: 'Crear Orden',
-    },
   ] as const;
   const handleEdit = () => {
     const newActive: 'Activo' | 'Inactivo' = customer?.customer.isActive
@@ -90,9 +84,9 @@ export const ClientDetails = ({ id }: { id: number }) => {
     ));
   };
   return (
-    <div className='flex h-full w-full pt-6'>
+    <div className='flex h-full w-full flex-col pt-6 md:flex-row'>
       <DetailsCard handleEdit={handleEdit} title='Datos del Cliente' infoRows={infoRows} />
-      <div className='flex w-full flex-col items-center space-y-10'>
+      <div className='mt-6 flex w-full flex-col items-center space-y-10 md:mt-0'>
         <div className='flex gap-6'>
           {pestañas.map((tab, index) => (
             <button

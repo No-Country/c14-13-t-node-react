@@ -9,21 +9,49 @@ import {
   TableRow,
   Text,
 } from '@/components/ui';
-import { ActionsButtons } from '../ActionsButtons';
-import { FullOrder } from '@/types/common';
 import { TableContainer } from '../TableContainer';
+import { useQuery } from '@tanstack/react-query';
+import { getOrders } from '@/services/orders';
+import { usePagination } from '@/hooks/usePagination';
 
-interface NewstOrdersTableProps {
-  orders: FullOrder[];
-}
-
-const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
+export const OrdersTable = ({ children }: { children: React.ReactNode }) => {
   const tableHead = ['Orden', 'Cliente', 'Vehículo', 'Servicio', 'Fecha de Entrega', 'Costo'];
+  const {
+    data: orders,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['orders'],
+    queryFn: getOrders,
+    // refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+
+  const itemsPerPage = 10;
+  const { currentPage, setCurrentPage, totalPages, PaginationButtons } = usePagination(
+    orders?.length ?? 1,
+    itemsPerPage,
+  );
+
+  if (isLoading) return <div className='w-full'>{children}</div>;
+  if (isError) return <div>Error: {String(error)}</div>;
+  if (orders?.length === 0) {
+    return (
+      <div className='flex h-full w-full items-center justify-center'>
+        <div>No hay Ordenes para mostrar</div>
+      </div>
+    );
+  }
+  const ordersOnCurrentPage = orders.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
 
   return (
     <TableContainer className='mt-4'>
       <Text variant='title' className='mb-4 text-center text-slate-800 dark:text-white'>
-        Ultimas Ordenes
+        Lista de Ordenes
       </Text>
       <Table>
         <TableHeader>
@@ -33,11 +61,10 @@ const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
                 {head}
               </TableHead>
             ))}
-            {/* <TableHead className='text-center'>Acciones</TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orders.map(({ id, vehicle, orderServices, departureDate, cost }) => {
+          {ordersOnCurrentPage.map(({ id, vehicle, orderServices, departureDate, cost }) => {
             const date = new Date(departureDate);
             const formatedDate = new Intl.DateTimeFormat('es-ES', {
               year: 'numeric',
@@ -58,23 +85,16 @@ const NewstOrdersTable = ({ orders }: NewstOrdersTableProps) => {
                     currencyDisplay: 'symbol',
                   })}
                 </TableCell>
-                {/* <TableCell className='flex items-center justify-center'>
-                  <ActionsButtons
-                    deleteFunction={() =>
-                      console.log(id) as unknown as Promise<Record<string, unknown>>
-                    }
-                    id={id}
-                    category='orders'
-                    deleteDescription={`Esta seguro que desea borrar la orden ${id}`}
-                  />
-                </TableCell> */}
               </TableRow>
             );
           })}
         </TableBody>
       </Table>
+      <PaginationButtons
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
     </TableContainer>
   );
 };
-
-export default NewstOrdersTable;
