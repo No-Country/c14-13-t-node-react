@@ -2,10 +2,9 @@ import { NextResponse, NextRequest } from 'next/server';
 import { handleCommonError } from '@/server/errorHandlers';
 import { getMechanicByDni } from '@/server/services/mechanics';
 
-
-export async function GET(req:NextRequest) {
-  const url = new URL (req.url)
-  const dni = url.searchParams.get('dni')
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url);
+  const dni = url.searchParams.get('dni');
 
   if (dni) {
     try {
@@ -25,12 +24,12 @@ export async function GET(req:NextRequest) {
       return handleCommonError(error);
     }
   }
-  return NextResponse.json({
-    message: 'Into Valid Parameter (dni)',
-  },
-  {
-    status: 400,
-  })
-
-    
-  }
+  return NextResponse.json(
+    {
+      message: 'Into Valid Parameter (dni)',
+    },
+    {
+      status: 400,
+    },
+  );
+}

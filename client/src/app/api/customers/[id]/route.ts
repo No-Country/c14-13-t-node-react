@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { handleCommonError } from '@/server/errorHandlers';
-import { getCustomerById, updateCustomer, removeCustomer} from '@/server/services/customers';
+import { getCustomerById, updateCustomer, removeCustomer } from '@/server/services/customers';
 import { CustomerCreationSchema } from '@/schemas/CustomerSchema';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {

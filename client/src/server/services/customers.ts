@@ -18,10 +18,10 @@ export const getCustomers = async () => {
 };
 
 export const updateCustomer = async (id: number, customerData: NewCustomer) => {
-  return await prisma.customer.update({where: {id}, data: customerData})
-}
+  return await prisma.customer.update({ where: { id }, data: customerData });
+};
 
 export const removeCustomer = async (id: number) => {
-  const deleteCustomer = await prisma.customer.delete({ where: { id }})
+  const deleteCustomer = await prisma.customer.delete({ where: { id } });
   return deleteCustomer;
-}
+};

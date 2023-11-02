@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { handleCommonError } from '@/server/errorHandlers';
-import { getWorkshopServiceById, updateWorkshopService, removeWorkshopService } from '@/server/services/workshopServices';
+import {
+  getWorkshopServiceById,
+  updateWorkshopService,
+  removeWorkshopService,
+} from '@/server/services/workshopServices';
 import { WorkshopServiceCreationSchema } from '@/schemas/WorkshopServicesSchema';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
